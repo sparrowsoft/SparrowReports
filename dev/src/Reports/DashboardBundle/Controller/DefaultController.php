@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/dashboard/{page}")
+     * @Route("/dashboard/{page}/{action}")
      * @Template()
      */
-    public function indexAction(Request $request, $page)
+    public function indexAction(Request $request, $page, $action = null)
     {
         $session = $request->getSession();
         $user = $session->get('user');

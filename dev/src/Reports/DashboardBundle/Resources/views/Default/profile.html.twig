@@ -4,9 +4,6 @@
 {% block body %}
     {% include "header.html.twig" %}    
         <div class="container">
-            
-            
-            
             <div class="row col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -48,13 +45,15 @@
                                 {{ form_widget(form.repeat_password) }}
                             </div>
                         </div>
-                        
+                            
+                        {% if session.role == 'a' %}
                         <div class="form-group row">
                             {{ form_label(form.role) }}
                             <div class="col-lg-9">
                                 {{ form_widget(form.role) }}
                             </div>
                         </div>
+                        {% endif %}
                         
                         <div class="form-group row">
                             {{ form_label(form.image) }}

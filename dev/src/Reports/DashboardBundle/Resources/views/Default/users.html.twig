@@ -47,9 +47,9 @@
                                 {% if user.id == session.id %}
                                 <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile' }) }}'">Edytuj</button>
                                 {% else %}
-                                <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile' }) }}?p={{ user.id }}'">Edytuj</button>    
+                                <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile', 'action' : 'edit', 'id' : user.id } )}}'">Edytuj</button>    
                                 {% endif %}
-                                <button type="button" class="btn btn-danger btn-xs modal-delete-user" data-toggle="modal" data-target="#questionModal"{% if user.id == session.id %} disabled{% endif %}>Usuń</button>
+                                <button type="button" class="btn btn-danger btn-xs modal-delete-user" data-toggle="modal" data-target="#questionModal"{% if user.id == session.id %} disabled{% endif %} data-user="{{ user.id }}">Usuń</button>
                             </td>
                         </tr>
                         {% endfor %}
@@ -81,7 +81,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                    <button type="button" class="btn btn-warning">Tak, jestem pewien</button>
+                    <button type="button" class="btn btn-warning" onclick="location.href='{{ path('dashboard', { 'page' : 'profile', 'action' : 'delete', 'id' : '0' } )}}'">Tak, jestem pewien</button>
                 </div>
             </div>
         </div>

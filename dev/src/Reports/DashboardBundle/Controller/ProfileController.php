@@ -36,12 +36,6 @@ class ProfileController extends Controller {
                 'required' => false,
                 'attr' => array('placeholder' => 'Powtórz hasło', 'class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label')
-            ))->add('role', 'choice', array(
-                'label' => 'Uprawnienia',
-                'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator'),
-                'data' => $user_data->role,
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-lg-3 control-label')
             ))->add('image', 'file', array(
                 'label' => 'Zdjęcie',
                 'required' => false,
@@ -51,7 +45,17 @@ class ProfileController extends Controller {
                 'label' => 'Zapisz',
                 'attr' => array('class' => 'btn btn-success'),
             ))->getForm();
-
+        
+        if ( $user_data->role == 'a' ) {
+            $form->add('role', 'choice', array(
+                'label' => 'Uprawnienia',
+                'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator'),
+                'data' => $user_data->role,
+                'attr' => array('class' => 'form-control'),
+                'label_attr' => array('class' => 'col-lg-3 control-label')
+            ));
+        }
+        
         $form->handleRequest($request);
 
         if ( $form->isValid() ) {
