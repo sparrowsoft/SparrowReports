@@ -17,8 +17,16 @@
                     <a href="{{ path('dashboard', { 'page' : 'profile' }) }}">Profil</a>
                 </li>
                 {% if session.role == 'a' %}
-                <li{% if app.request.getPathInfo == '/dashboard/users' %} class="active"{% endif %}>
-                    <a href="{{ path('dashboard', { 'page' : 'users' }) }}">Personel</a>
+                <li{% if app.request.getPathInfo == '/dashboard/users' %}
+                    class="active dropdown"                                                      
+                {% else %}
+                    class="dropdown"
+                {% endif %}>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Personel <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Dodaj użytkownika</a></li>
+                        <li><a href="{{ path('dashboard', { 'page' : 'users' }) }}">Lista użytkowników</a></li>
+                    </ul>
                 </li>
                 {% endif %}
             </ul>
