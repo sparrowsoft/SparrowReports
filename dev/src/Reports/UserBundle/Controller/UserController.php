@@ -69,6 +69,10 @@ class UserController extends Controller
             }
         } 
         
+        if ( $user->role == 'u' ) {
+            $data['role'] = 'u';
+        }
+        
         $update = $em->getConnection()->prepare(
                 "UPDATE users
                 SET first_name = '" . $data['first_name'] . "', 
@@ -79,13 +83,14 @@ class UserController extends Controller
 
         $update->execute();
 
-        
-        $user->first_name = $data['first_name'];
-        $user->last_name = $data['last_name'];
-        $user->role = $data['role'];
-        $user->email = $data['username'];
-        
-        $session->set('user', $user);
+        if ( !isset($_GET['action']) ) {
+            $user->first_name = $data['first_name'];
+            $user->last_name = $data['last_name'];
+            $user->role = $data['role'];
+            $user->email = $data['username'];
+
+            $session->set('user', $user);
+        }
         
         return 1;
     }

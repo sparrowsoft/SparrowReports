@@ -10,16 +10,20 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/dashboard/{page}/{action}")
+     * @Route("/dashboard/{page}")
      * @Template()
      */
-    public function indexAction(Request $request, $page, $action = null)
+    public function indexAction(Request $request, $page)
     {
         $session = $request->getSession();
         $user = $session->get('user');
-  
+        
         if ( $user != NULL ) {
-            $args = $this->getArguments($user->id, $page, $request);
+            if ( isset($_GET['action']) && $_GET['action'] == 'edit' ) {
+                $args = $this->getArguments($_GET['id'], $page, $request);
+            } else {
+                $args = $this->getArguments($user->id, $page, $request);
+            }
             
             return $this->render(
                 'ReportsDashboardBundle:Default:' . $page . '.html.twig',

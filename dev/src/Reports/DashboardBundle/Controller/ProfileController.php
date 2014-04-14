@@ -46,7 +46,7 @@ class ProfileController extends Controller {
                 'attr' => array('class' => 'btn btn-success'),
             ))->getForm();
         
-        if ( $user_data->role == 'a' ) {
+        if ( $user_data->role == 'a' || isset($_GET['action'])) {
             $form->add('role', 'choice', array(
                 'label' => 'Uprawnienia',
                 'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator'),
