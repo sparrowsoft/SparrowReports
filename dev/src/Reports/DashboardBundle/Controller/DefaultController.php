@@ -17,10 +17,11 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $user = $session->get('user');
+        $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
         
         if ( $user != NULL ) {
-            if ( isset($_GET['action']) && $_GET['action'] == 'edit' ) {
-                $args = $this->getArguments($_GET['id'], $page, $request);
+            if ( isset($action) && $action == 'edit' ) {
+                $args = $this->getArguments(filter_input(INPUT_GET, 'id'), $page, $request);
             } else {
                 $args = $this->getArguments($user->id, $page, $request);
             }
@@ -49,8 +50,8 @@ class DefaultController extends Controller
                 return $args = $this->get('profile_service')->createProfileForm($user_data, $request);
             
             case 'users':
-                if ( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
-                    $this->get('user_service')->deleteUser($_GET['id'], $request);
+                if ( isset($action) && $action == 'delete' ) {
+                    $this->get('user_service')->deleteUser(filter_input(INPUT_GET, 'id'), $request);
                 } 
                 
                 if ( $user->role == 'a' ) {

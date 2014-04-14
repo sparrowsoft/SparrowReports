@@ -16,10 +16,12 @@ class UserController extends Controller
     
     public function setUserData($data, $id, $request) {
         $session = $request->getSession();
-        $em = $this->getDoctrine()->getManager();
-        
         $user = $session->get('user');
         
+        $action = filter_input(INPUT_GET, 'action');
+        
+        $em = $this->getDoctrine()->getManager();
+
         $username = $em->getRepository('ReportsUserBundle:Users')->findOneBy(array(
             'email' => $data['username'],
         ));
@@ -83,7 +85,7 @@ class UserController extends Controller
 
         $update->execute();
 
-        if ( !isset($_GET['action']) ) {
+        if ( !isset($action) ) {
             $user->first_name = $data['first_name'];
             $user->last_name = $data['last_name'];
             $user->role = $data['role'];
