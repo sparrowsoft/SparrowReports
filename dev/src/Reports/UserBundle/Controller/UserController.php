@@ -208,8 +208,7 @@ class UserController extends Controller
                 $update->execute();
             
                 return 1;
-            }
-            
+            }  
         }
     }
 }

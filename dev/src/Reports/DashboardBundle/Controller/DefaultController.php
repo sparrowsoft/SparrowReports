@@ -62,6 +62,10 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('dashboard', array('page' => 'index')));
                 } 
                 
+            case 'reports':
+                $breadcrumbs = '<li class="active">Raporty</li>';
+                return array('breadcrumbs' => $breadcrumbs);
+                
             default: return array('breadcrumbs' => '<li class="active">Strona główna</li>');
         }
     }

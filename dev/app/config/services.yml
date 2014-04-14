@@ -1,3 +1,0 @@
-services:
-    user_service:
-        class: Reports\UserBundle\Controller\UserController
