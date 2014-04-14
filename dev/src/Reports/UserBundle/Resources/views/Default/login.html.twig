@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% block title %}Logowanie{% endblock %}
+{% block class %}login{% endblock %}
+{% block body %}
+<img src="{{ asset('assets/images/sparrowLogo.png') }}" alt="sparrow logo" class="login-logo"/>
+<div class="login-container form-controls{% if error != '' %} has-alert{% endif %}">  
+    <div class="alert alert-success">Zaloguj się do aplikacji <strong>SparrowReports</strong></div>
+    {{ error | raw }}
+    {{ form(form) }}
+</div> 
+{% endblock %} 
+
+{% block customJavascripts %}
+    <script src="{{ asset('assets/js/loginScripts.js') }}"></script>
+{% endblock %}
+
+{% block customLess %}
+    <link rel="stylesheet" type="text/less" href="{{ asset('assets/less/loginStyles.less') }}" />
+{% endblock %}

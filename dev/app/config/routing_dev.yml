@@ -1,0 +1,26 @@
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+
+_configurator:
+    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
+    prefix:   /_configurator
+
+_main:
+    resource: routing.yml
+    
+login:
+    path:      /login
+    defaults:  { _controller: ReportsUserBundle:User:login }
+
+logout:
+    path:      /logout
+    defaults:  { _controller: ReportsUserBundle:User:logout }
+    
+dashboard:
+    path: /dashboard/{page}
+    defaults: { _controller: ReportsDashboardBundle:Default:index }

@@ -1,0 +1,97 @@
+.simpletransition, .alert{
+    -webkit-transition: all 500ms cubic-bezier(1.000, 0.075, 0.000, 1); /* older webkit */
+-webkit-transition: all 500ms cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+   -moz-transition: all 500ms cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+     -o-transition: all 500ms cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+        transition: all 500ms cubic-bezier(1.000, 0.075, 0.000, 1.005); /* custom */
+
+-webkit-transition-timing-function: cubic-bezier(1.000, 0.075, 0.000, 1); /* older webkit */
+-webkit-transition-timing-function: cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+   -moz-transition-timing-function: cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+     -o-transition-timing-function: cubic-bezier(1.000, 0.075, 0.000, 1.005); 
+        transition-timing-function: cubic-bezier(1.000, 0.075, 0.000, 1.005); /* custom */
+}
+
+
+body{
+    background-image: url('/assets/images/background.jpg');
+    *{
+        font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+}
+
+#preloader{
+    position: fixed;
+    width:100%;
+    height:100%;
+    z-index: 9999;
+    top:0;
+    left:0;
+    background-color: #f4f4f4;
+}
+.preloader-logo{
+    display: block;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+.preloader-gif{
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.navbar-brand{
+    background-repeat: no-repeat;
+    background-image: url('/assets/images/favicon.png');
+    background-position: left top;
+    background-size: contain;
+    left: 15px;
+    padding-left: 75px !important;
+    padding-right: 48px !important;
+    position: relative;
+}
+
+
+.container-breadcrumbs{
+     margin-top: -12px;
+     margin-bottom: 10px; 
+}
+
+.header-avatar{
+    margin-right: 10px;
+    width: auto;
+    height: 22px;
+    border-radius: 100px;
+}
+
+.table-buttons{
+    margin-bottom:20px;
+}
+
+.table-pagination {
+    margin: 0 auto !important;
+    width: 226px;
+    display: block !important;
+}
+
+.user-name-modal{
+    background-color: #eee;
+    padding: 6px;
+    border-radius: 4px;
+    padding-bottom: 8px;
+    padding-top: 4px;
+    margin-right: 8px;
+    margin-left: 5px;
+    border-width: 0 1px 4px 1px;
+    border: 1px solid #e2e2e2;
+    
+    margin-top: 1px !important;
+    border-bottom-width: 2px !important;
+    &:hover{
+        cursor: default;
+    }
+    img {
+        margin-left: -1px;
+        margin-right: 3px;    
+    }
+}

@@ -1,0 +1,15 @@
+reports_dashboard:
+    resource: "@ReportsDashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+reports_user:
+    resource: "@ReportsUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+reports_auth:
+    resource: "@ReportsAuthBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

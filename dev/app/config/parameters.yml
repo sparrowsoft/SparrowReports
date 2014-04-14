@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_pgsql
+    database_host: psql.bposparrow.home.pl
+    database_port: 5432
+    database_name: 11021079_reports
+    database_user: 11021079_reports
+    database_password: vertrigo123
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: pl
+    secret: 2f42d954e6da32e33ac817dde3237a62045b4fa0
+    database_path: null
