@@ -81,12 +81,7 @@ class DefaultController extends Controller
             $validate = $user->validatePassword($data, $user_info);
             
             if ( $validate == 1 ) {
-                $session->set('user', $user_info->id);
-                $session->set('user_first_name', $user_info->first_name);
-                $session->set('user_last_name', $user_info->last_name);
-                $session->set('user_avatar', $user_info->image);
-                $session->set('user_role', $user_info->role);
-
+                $session->set('user', $user_info);
                 return 0;
             } 
             

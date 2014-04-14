@@ -1,6 +1,6 @@
 <div class="container container-breadcrumbs">
     <ul class="breadcrumb" style="margin-bottom: 5px;">
-        <li>{{ app.session.get('user_first_name') }} {{ app.session.get('user_last_name') }}</li>
+        <li>{{ session.first_name }} {{ session.last_name }}</li>
         <li><a href="{{ path('dashboard', { 'page' : 'index' }) }}">Kokpit</a></li>
         {{ breadcrumbs | raw }}
     </ul>

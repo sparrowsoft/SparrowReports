@@ -3,7 +3,6 @@
 {% block bodyClass %}dashboard users{% endblock %}
 {% block body %}
     {% include "header.html.twig" %}    
-
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -45,12 +44,12 @@
                             <td><span class="label label-default">Użytkownik</span></td>
                             {% endif %}    
                             <td>
-                                {% if user.id == app.session.get('user') %}
+                                {% if user.id == session.id %}
                                 <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile' }) }}'">Edytuj</button>
                                 {% else %}
                                 <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile' }) }}?p={{ user.id }}'">Edytuj</button>    
                                 {% endif %}
-                                <button type="button" class="btn btn-danger btn-xs modal-delete-user" data-toggle="modal" data-target="#questionModal"{% if user.id == app.session.get('user') %} disabled{% endif %}>Usuń</button>
+                                <button type="button" class="btn btn-danger btn-xs modal-delete-user" data-toggle="modal" data-target="#questionModal"{% if user.id == session.id %} disabled{% endif %}>Usuń</button>
                             </td>
                         </tr>
                         {% endfor %}

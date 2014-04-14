@@ -18,6 +18,8 @@ class UserController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
         
+        $user = $session->get('user');
+        
         $username = $em->getRepository('ReportsUserBundle:Users')->findOneBy(array(
             'email' => $data['username'],
         ));
@@ -47,7 +49,7 @@ class UserController extends Controller
                 
             $update->execute();
             
-            $session->set('user_avatar', $file);
+            $user->image = $file;
         }
         
         if ( $data['password'] != NULL ) {
@@ -77,9 +79,13 @@ class UserController extends Controller
 
         $update->execute();
 
-        $session->set('user_first_name', $data['first_name']);
-        $session->set('user_last_name', $data['last_name']);
-        $session->set('user_role', $data['role']);
+        
+        $user->first_name = $data['first_name'];
+        $user->last_name = $data['last_name'];
+        $user->role = $data['role'];
+        $user->email = $data['username'];
+        
+        $session->set('user', $user);
         
         return 1;
     }

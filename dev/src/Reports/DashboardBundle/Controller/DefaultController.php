@@ -16,9 +16,10 @@ class DefaultController extends Controller
     public function indexAction(Request $request, $page)
     {
         $session = $request->getSession();
-        
-        if ( $session->get('user') != NULL ) {
-            $args = $this->getArguments($session->get('user'), $page, $request);
+        $user = $session->get('user');
+  
+        if ( $user != NULL ) {
+            $args = $this->getArguments($user->id, $page, $request);
             
             return $this->render(
                 'ReportsDashboardBundle:Default:' . $page . '.html.twig',
@@ -37,6 +38,7 @@ class DefaultController extends Controller
         }
         
         $session = $request->getSession();
+        $user = $session->get('user');
         
         switch ($page) {
             case 'profile':
@@ -44,7 +46,7 @@ class DefaultController extends Controller
                 return $args;
             
             case 'users':
-                if ( $session->get('user_role') == 'a' ) {
+                if ( $user->role == 'a' ) {
                     $args = $this->get('personel_service')->showTable();
                     return $args;
                 }
