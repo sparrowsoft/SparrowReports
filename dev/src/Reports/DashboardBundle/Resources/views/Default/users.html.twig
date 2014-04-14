@@ -81,7 +81,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                    <button type="button" class="btn btn-warning" onclick="location.href='{{ path('dashboard', { 'page' : 'profile', 'action' : 'delete', 'id' : '0' } )}}'">Tak, jestem pewien</button>
+                    <button type="button" class="btn btn-warning" onclick="{{ path('dashboard', { 'page' : 'profile', 'action' : 'delete' } )}}">Tak, jestem pewien</button>
                 </div>
             </div>
         </div>
