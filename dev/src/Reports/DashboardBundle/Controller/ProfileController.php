@@ -10,6 +10,13 @@ class ProfileController extends Controller {
         $user_id = $user_data->id;
         $error = 0;
         
+        if ( isset($_GET['action']) && $_GET['action'] == 'add') {
+            $user_id = 0;
+            $user_data->first_name = NULL;
+            $user_data->last_name = NULL;
+            $user_data->email = NULL;
+        }
+        
         $form = $this->createFormBuilder()
             ->add('first_name', 'text', array(
                 'label' => 'Imię',
@@ -60,7 +67,11 @@ class ProfileController extends Controller {
 
         if ( $form->isValid() ) {
             $data = $form->getData();
-            $error = $this->get('user_service')->setUserData($data, $user_id, $request);
+            if ( isset($_GET['action']) && $_GET['action'] == 'add' ) {
+                $error = $this->get('user_service')->addNewUser($data, $request);
+            } else {
+                $error = $this->get('user_service')->setUserData($data, $user_id, $request);
+            }
         }
         
         $profile_errors = array(
@@ -76,8 +87,12 @@ class ProfileController extends Controller {
                 . '<p>Wprowadzone hasła różnią się od siebie!</p></div>',
         );
         
-        $breadcrumbs = '<li class="active">Profil</li>';
-        
+        if ( isset($_GET['action']) && $_GET['action'] == 'add' ) {
+            $breadcrumbs = '<li><a href="' . $this->generateUrl('dashboard', array('page' => 'profile')) . '">Profil</a></li><li class="active">Dodaj użytkownika</li>';
+        } else {
+            $breadcrumbs = '<li class="active">Profil</li>';
+        }
+
         return $args = array('form' => $form->createView(), 'app_error' => $profile_errors[$error], 'breadcrumbs' => $breadcrumbs);
     }
 }

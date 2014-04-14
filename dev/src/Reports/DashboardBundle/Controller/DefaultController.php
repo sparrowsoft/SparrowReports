@@ -46,10 +46,13 @@ class DefaultController extends Controller
         
         switch ($page) {
             case 'profile':
-                $args = $this->get('profile_service')->createProfileForm($user_data, $request);
-                return $args;
+                return $args = $this->get('profile_service')->createProfileForm($user_data, $request);
             
             case 'users':
+                if ( isset($_GET['action']) && $_GET['action'] == 'delete' ) {
+                    $this->get('user_service')->deleteUser($_GET['id'], $request);
+                } 
+                
                 if ( $user->role == 'a' ) {
                     $args = $this->get('personel_service')->showTable();
                     return $args;
@@ -57,7 +60,7 @@ class DefaultController extends Controller
                 
                 else {
                     return $this->redirect($this->generateUrl('dashboard', array('page' => 'index')));
-                }
+                } 
                 
             default: return array('breadcrumbs' => '<li class="active">Strona główna</li>');
         }

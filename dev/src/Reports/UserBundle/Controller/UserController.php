@@ -148,4 +148,68 @@ class UserController extends Controller
         
         return $users;
     }
+    
+    public function deleteUser($id, $request) {
+        $session = $request->getSession();
+        $user = $session->get('user');
+        
+        if ( $user->id != $id && $user->role == 'a' ) {
+            $em = $this->getDoctrine()->getManager();
+            
+            $update = $em->getConnection()->prepare(
+                "DELETE FROM users WHERE id = '" . $id. "'"
+            );
+
+            $update->execute();
+        }
+    }
+    
+    public function addNewUser($data, $request) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $username = $em->getRepository('ReportsUserBundle:Users')->findOneBy(array(
+            'email' => $data['username'],
+        ));
+        
+        if ( count($username) > 0 ) {
+            return 2;
+        }
+        
+        else {
+            if ( $data['password'] != $data['repeat_password'] ) {
+                return 3;
+            }
+            
+            else {
+                $user = new Users();
+                $password = $user->hashPassword($data['password']);
+                
+                if ( $data['image'] != NULL ) {
+                    $file = uniqid() . $data['image']->getClientOriginalName();
+
+                    $this->generate_thumb($data['image'], 'uploads/' . $file, 100, 100);
+                } else {
+                    $file = NULL;
+                }
+                
+                $select = $em->getConnection()->prepare(
+                    "SELECT id FROM users ORDER BY id DESC"
+                );
+                
+                $select->execute();
+                $results = $select->fetchAll();
+                $next_id = $results[0]['id'] + 1;
+                
+                $update = $em->getConnection()->prepare(
+                    "INSERT INTO users VALUES (" . $next_id . ", '" . $data['username'] . "', '" . $password . "', '" . $data['first_name'] 
+                        . "', '" . $data['last_name'] . "', '" . $data['role'] . "', '" . $data['image'] . "')"
+                );
+
+                $update->execute();
+            
+                return 1;
+            }
+            
+        }
+    }
 }

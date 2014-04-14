@@ -119,6 +119,58 @@ class Users
         return $this->password;
     }
     
+    /**
+     * Set first_name
+     *
+     * @param string $first_name
+     * @return Users
+     */
+    public function setFirstName($first_name)
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+    
+    /**
+     * Set last_name
+     *
+     * @param string $last_name
+     * @return Users
+     */
+    public function setLastName($last_name)
+    {
+        $this->last_name = $last_name;
+
+        return $this;
+    }
+    
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Users
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+    
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return Users
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+    
     public function hashPassword($password) {
         $salt = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
 	$hash = hash('sha256', $salt . $password);
