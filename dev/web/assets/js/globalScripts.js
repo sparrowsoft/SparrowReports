@@ -9,6 +9,8 @@ jQuery(document).ready(function(){
         }   
    });
    
+   
+   //deleting user modal
    jQuery('.modal-delete-user').click(function(){
       jQuery('#questionModal button.user-name-modal').html($(this).parent().parent().children('.user-name').html());
       
@@ -16,7 +18,8 @@ jQuery(document).ready(function(){
       var deletePath = jQuery('#questionModal .btn-warning').attr('onclick');
       
       console.log(jQuery('#questionModal .btn-warning').attr('onclick', "location.href='"+deletePath+"&id="+userId+"'"));
-      
-      
    });
+   
+   
+   $(".report-colum").height($(".report-colum").eq(0).height());
 });

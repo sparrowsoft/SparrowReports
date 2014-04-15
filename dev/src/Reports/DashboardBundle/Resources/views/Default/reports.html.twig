@@ -3,5 +3,51 @@
 {% block bodyClass %}dashboard reports{% endblock %}
 {% block body %}
     {% include "header.html.twig" %}    
-        
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 report-colum panel panel-info">
+                <div class="panel-heading">Wybierz klienta</div>
+                <div class="panel-body">
+
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#">Raabe</a></li>
+                        <li><a href="#">Srabe</a></li>
+                        <li><a href="#">ING</a></li>
+                        <li><a href="#">Mega Profit</a></li>
+                        <li><a href="#">Ding Dong</a></li>
+                        <li><a href="#">Cotozazjest</a></li>
+                        <li><a href="#">Wsip</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 report-colum panel panel-default">
+                <div class="panel-heading">Wybierz kampanię</div>
+                <div class="panel-body">
+                    <div class="panel-disabled-info">
+                        <img src="{{ asset('assets/images/logo-disabled.png') }}" alt="sparrow logo" class="disabled-logo"/>
+                        <h3>Proszę wybrać klienta</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 report-colum panel panel-default">
+                <div class="panel-heading">Wybierz raport</div>
+                <div class="panel-body">
+                    <div class="panel-disabled-info">
+                        <img src="{{ asset('assets/images/logo-disabled.png') }}" alt="sparrow logo" class="disabled-logo"/>
+                        <h3>Proszę wybrać kampanię</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 panel report-buttons-strip">
+                <div class="panel-body row">
+                    <div class="col-lg-9"></div>
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-disabled btn">Generuj html</button>
+                        <button type="button" class="btn btn-disabled btn">Pobierz *.xls</button>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

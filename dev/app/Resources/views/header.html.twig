@@ -20,11 +20,11 @@
                     <a href="{{ path('dashboard', { 'page' : 'profile' }) }}">Profil</a>
                 </li>
                 {% if session.role == 'a' %}
-                <li{% if app.request.getPathInfo == '/dashboard/users' %}
-                    class="active dropdown"                                                      
-                {% else %}
-                    class="dropdown"
-                {% endif %}>
+                    <li{% if app.request.getPathInfo == '/dashboard/users' %}
+                        class="active dropdown"                                                      
+                    {% else %}
+                        class="dropdown"
+                    {% endif %}>
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Personel <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ path('dashboard', { 'page' : 'profile', 'action' : 'add' }) }}">Dodaj użytkownika</a></li>
@@ -32,34 +32,34 @@
                     </ul>
                 </li>
                 {% endif %}
-            </ul>
-            <form class="navbar-form navbar-left">
-                <input type="text" class="form-control col-lg-8" placeholder="Szukaj">
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{{ path('dashboard', { 'page' : 'profile' }) }}">
-                        {% if session.image != '' %}
-                        <img src="{{ asset('uploads') }}/{{ session.image }}" alt="User Avatar" class="header-avatar" />
-                        {% else %}
-                        <img src="http://lorempixel.com/20/20/people/" alt="User Avatar" class="header-avatar" />    
-                        {% endif %}
-                        {{ session.first_name }} {{ session.last_name }}
-                    </a>
-                </li>
-                <li><a href="{{ path('logout') }}">Wyloguj się</a></li>
-            </ul>
-        </div>
-      
-    </div>
-</div>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control col-lg-8" placeholder="Szukaj">
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{ path('dashboard', { 'page' : 'profile' }) }}">
+                            {% if session.image != '' %}
+                                <img src="{{ asset('uploads') }}/{{ session.image }}" alt="User Avatar" class="header-avatar" />
+                            {% else %}
+                                <img src="http://lorempixel.com/50/50/people/" alt="User Avatar" class="header-avatar" />    
+                            {% endif %}
+                            {{ session.first_name }} {{ session.last_name }}
+                        </a>
+                    </li>
+                    <li><a href="{{ path('logout') }}">Wyloguj się</a></li>
+                </ul>
+            </div>
 
-{% include "breadcrumbs.html.twig" %}
-            
-<div class="container">   
-    {% if app_error is defined %}{{ app_error | raw }}{% endif %}
-    <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <p><strong>Uwaga! </strong>Oprogramowanie w trakcie budowy</p>
+        </div>
     </div>
-</div>   
+
+    {% include "breadcrumbs.html.twig" %}
+
+    <div class="container">   
+        {% if app_error is defined %}{{ app_error | raw }}{% endif %}
+        <div class="alert alert-dismissable alert-warning">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <p><strong>Uwaga! </strong>Oprogramowanie w trakcie budowy</p>
+        </div>
+    </div>   
