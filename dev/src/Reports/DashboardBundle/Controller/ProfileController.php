@@ -5,13 +5,17 @@ namespace Reports\DashboardBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ProfileController extends Controller {
-
+    public $action;
+    
+    public function __construct() {
+        $this->action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    }
+    
     public function createProfileForm($user_data, $request) {
         $user_id = $user_data->id;
         $error = 0;
-        $action = filter_input(INPUT_GET, 'action');
         
-        if ( isset($action) && $action == 'add') {
+        if ( isset($this->action) && $this->action == 'add') {
             $user_id = 0;
             $user_data->first_name = NULL;
             $user_data->last_name = NULL;
@@ -54,7 +58,7 @@ class ProfileController extends Controller {
                 'attr' => array('class' => 'btn btn-success'),
             ))->getForm();
         
-        if ( $user_data->role == 'a' || isset($action)) {
+        if ( $user_data->role == 'a' || isset($this->action)) {
             $form->add('role', 'choice', array(
                 'label' => 'Uprawnienia',
                 'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator'),
@@ -68,8 +72,8 @@ class ProfileController extends Controller {
 
         if ( $form->isValid() ) {
             $data = $form->getData();
-            if ( isset($action) && $action == 'add' ) {
-                $error = $this->get('user_service')->addNewUser($data, $request);
+            if ( isset($this->action) && $this->action == 'add' ) {
+                $error = $this->get('user_service')->addNewUser($data);
             } else {
                 $error = $this->get('user_service')->setUserData($data, $user_id, $request);
             }
@@ -88,7 +92,7 @@ class ProfileController extends Controller {
                 . '<p>Wprowadzone hasła różnią się od siebie!</p></div>',
         );
         
-        if ( isset($action) && $action == 'add' ) {
+        if ( isset($this->action) && $this->action == 'add' ) {
             $breadcrumbs = '<li><a href="' . $this->generateUrl('dashboard', array('page' => 'profile')) . '">Profil</a></li><li class="active">Dodaj użytkownika</li>';
         } else {
             $breadcrumbs = '<li class="active">Profil</li>';

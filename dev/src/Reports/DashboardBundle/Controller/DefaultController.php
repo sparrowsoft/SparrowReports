@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    public $action;
+    
+    public function __construct() {
+        $this->action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    }
+    
     /**
      * @Route("/dashboard/{page}")
      * @Template()
@@ -17,10 +23,9 @@ class DefaultController extends Controller
     {
         $session = $request->getSession();
         $user = $session->get('user');
-        $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
         
         if ( $user != NULL ) {
-            if ( isset($action) && $action == 'edit' ) {
+            if ( isset($this->action) && $this->action == 'edit' ) {
                 $args = $this->getArguments(filter_input(INPUT_GET, 'id'), $page, $request);
             } else {
                 $args = $this->getArguments($user->id, $page, $request);
@@ -41,7 +46,7 @@ class DefaultController extends Controller
         if ( $user_id ) {
             $user_data = $this->get('user_service')->getUserData($user_id);
         }
-        
+
         $session = $request->getSession();
         $user = $session->get('user');
         
@@ -50,7 +55,7 @@ class DefaultController extends Controller
                 return $args = $this->get('profile_service')->createProfileForm($user_data, $request);
             
             case 'users':
-                if ( isset($action) && $action == 'delete' ) {
+                if ( isset($this->action) && $this->action == 'delete' ) {
                     $this->get('user_service')->deleteUser(filter_input(INPUT_GET, 'id'), $request);
                 } 
                 

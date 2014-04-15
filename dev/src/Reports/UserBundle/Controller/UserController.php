@@ -7,6 +7,12 @@ use Reports\UserBundle\Entity\Users;
 
 class UserController extends Controller
 {
+    public $action;
+    
+    public function __construct() {
+        $this->action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+    }
+    
     public function getUserData($id) {
         $em = $this->getDoctrine()->getManager();
         $user_data = $em->getRepository('ReportsUserBundle:Users')->find($id);
@@ -18,12 +24,10 @@ class UserController extends Controller
         $session = $request->getSession();
         $user = $session->get('user');
         
-        $action = filter_input(INPUT_GET, 'action');
-        
         $em = $this->getDoctrine()->getManager();
 
         $username = $em->getRepository('ReportsUserBundle:Users')->findOneBy(array(
-            'email' => $data['username'],
+            'email' => $data['username']
         ));
         
         if ( count($username) > 0 ) {
@@ -76,7 +80,7 @@ class UserController extends Controller
         }
         
         $update = $em->getConnection()->prepare(
-                "UPDATE users
+                "UPDATE spr_users
                 SET first_name = '" . $data['first_name'] . "', 
                 last_name = '" . $data['last_name'] ."', 
                 role = '" . $data['role'] . "'
@@ -85,7 +89,7 @@ class UserController extends Controller
 
         $update->execute();
 
-        if ( !isset($action) ) {
+        if ( !isset($this->action) ) {
             $user->first_name = $data['first_name'];
             $user->last_name = $data['last_name'];
             $user->role = $data['role'];
@@ -159,14 +163,14 @@ class UserController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $update = $em->getConnection()->prepare(
-                "DELETE FROM users WHERE id = '" . $id. "'"
+                "DELETE FROM spr_users WHERE id = '" . $id. "'"
             );
 
             $update->execute();
         }
     }
     
-    public function addNewUser($data, $request) {
+    public function addNewUser($data) {
         $em = $this->getDoctrine()->getManager();
         
         $username = $em->getRepository('ReportsUserBundle:Users')->findOneBy(array(
@@ -195,7 +199,7 @@ class UserController extends Controller
                 }
                 
                 $select = $em->getConnection()->prepare(
-                    "SELECT id FROM users ORDER BY id DESC"
+                    "SELECT id FROM spr_users ORDER BY id DESC"
                 );
                 
                 $select->execute();
@@ -203,7 +207,7 @@ class UserController extends Controller
                 $next_id = $results[0]['id'] + 1;
                 
                 $update = $em->getConnection()->prepare(
-                    "INSERT INTO users VALUES (" . $next_id . ", '" . $data['username'] . "', '" . $password . "', '" . $data['first_name'] 
+                    "INSERT INTO spr_users VALUES (" . $next_id . ", '" . $data['username'] . "', '" . $password . "', '" . $data['first_name'] 
                         . "', '" . $data['last_name'] . "', '" . $data['role'] . "', '" . $data['image'] . "')"
                 );
 

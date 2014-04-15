@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Users
  *
- * @ORM\Table()
+ * @ORM\Table(name="spr_users")
  * @ORM\Entity(repositoryClass="Reports\UserBundle\Entity\UsersRepository")
  */
 class Users
@@ -71,104 +71,6 @@ class Users
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Users
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Users
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    
-    /**
-     * Set first_name
-     *
-     * @param string $first_name
-     * @return Users
-     */
-    public function setFirstName($first_name)
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
-    
-    /**
-     * Set last_name
-     *
-     * @param string $last_name
-     * @return Users
-     */
-    public function setLastName($last_name)
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-    
-    /**
-     * Set role
-     *
-     * @param string $role
-     * @return Users
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-    
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return Users
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
     }
     
     public function hashPassword($password) {
