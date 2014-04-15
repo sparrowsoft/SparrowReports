@@ -69,8 +69,8 @@ class DefaultController extends Controller
                 } 
                 
             case 'reports':
-                $breadcrumbs = '<li class="active">Raporty</li>';
-                return array('breadcrumbs' => $breadcrumbs);
+                $args = $this->get('reports_service')->show();
+                return $args;
                 
             default: return array('breadcrumbs' => '<li class="active">Strona główna</li>');
         }
