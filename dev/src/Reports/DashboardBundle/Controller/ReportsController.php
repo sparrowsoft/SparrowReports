@@ -24,10 +24,7 @@ class ReportsController extends Controller {
             $campaigns_inactive = $this->getCampaigns($this->client, 'Nieaktywna');
         }
         
-        $default_date = date('Y-m-d', (strtotime('-1 day' , strtotime(date('Y-m-d')))));
-//        if ( isset($this->campaign) ) {
-//            $this->get('reports_common_konsultant')->getReport();
-//        }
+        $default_date = date('Y-m-d');
         
         return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $default_date);
     }
@@ -80,15 +77,7 @@ class ReportsController extends Controller {
         
         $campaigns->execute();
         $campaigns_rows = $campaigns->fetchAll();
-        
-//        $sort = array();
-//        
-//        foreach ( $campaigns_rows as $row ) {
-//            $row = explode('_', $row['campaign_name']);
-//            $sort[] = $row[0];
-//        }
-//        
-//        arsort($sort);
+
         return $campaigns_rows;
     }
     

@@ -5,7 +5,7 @@
     {% include "header.html.twig" %}    
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 report-colum panel panel-info">
+            <div class="col-lg-3 report-colum panel {{ app.request.get('client') ? 'panel-info' : 'panel-primary' }}">
                 <div class="panel-heading">Wybierz klienta</div>
                 <div class="panel-body">
                     <input type="text" class="form-control col-lg-8 clients-search reports-search" placeholder="Szukaj">
@@ -16,7 +16,14 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 report-colum panel {{ app.request.get('client') ? 'panel-info' : 'panel-default' }}">
+            {% if app.request.get('client') and app.request.get('campaign') is empty %}
+                {% set panel_class = 'panel-primary' %}
+            {% elseif ( app.request.get('campaign') ) %}
+                {% set panel_class = 'panel-info' %}
+            {% else %}
+                {% set panel_class = 'panel-default' %}    
+            {% endif %}
+            <div class="col-lg-3 report-colum panel {{ panel_class }}">
                 <div class="panel-heading">Wybierz kampanię</div>
                 <div class="panel-body">
                     <div class="panel-disabled-info{{ app.request.get('client') ? ' hidden' : '' }}">
@@ -48,7 +55,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col-lg-6 report-colum panel {{ app.request.get('campaign') ? 'panel-info' : 'panel-default' }}">
+            <div class="col-lg-6 report-colum panel {{ app.request.get('campaign') ? 'panel-primary' : 'panel-default' }}">
                 <div class="panel-heading">Wybierz zakres dat i raport</div>
                 <div class="panel-body">
                     <div class="panel-disabled-info{{ app.request.get('campaign') ? ' hidden' : '' }}">
