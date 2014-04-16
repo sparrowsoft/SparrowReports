@@ -32,13 +32,17 @@
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade active in" id="active">
                                 <ul class="nav nav-pills nav-stacked">
-                                    {% for campaign in campaigns %}
+                                    {% for campaign in campaigns_active %}
                                         <li{{ app.request.get('campaign') == campaign ? ' class="campaigns-li active"' : ' class="campaigns-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : app.request.get('client'), 'campaign' : campaign }) }}">{{ campaign }}</a></li>    
                                         {% endfor %}
                                 </ul> 
                             </div>
                             <div class="tab-pane fade in" id="inactive">
-
+                                <ul class="nav nav-pills nav-stacked">
+                                    {% for campaign in campaigns_inactive %}
+                                        <li{{ app.request.get('campaign') == campaign ? ' class="campaigns-li active"' : ' class="campaigns-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : app.request.get('client'), 'campaign' : campaign }) }}">{{ campaign }}</a></li>    
+                                        {% endfor %}
+                                </ul> 
                             </div>
                         </div>
                     {% endif %}
@@ -46,38 +50,33 @@
 
 
             </div>
-            <div class="col-lg-6 report-colum panel panel-info">
+            <div class="col-lg-6 report-colum panel {{ app.request.get('campaign') ? 'panel-info' : 'panel-default' }}">
                 <div class="panel-heading">Wybierz zakres dat i raport</div>
                 <div class="panel-body">
-                    <div class="panel-disabled-info hidden">
+                    <div class="panel-disabled-info{{ app.request.get('campaign') ? ' hidden' : '' }}">
                         <img src="{{ asset('assets/images/logo-disabled.png') }}" alt="sparrow logo" class="disabled-logo"/>
                         <h3>Proszę wybrać kampanię</h3>
                     </div>
-
-
-                    <div class="col-lg-3 input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                        <label for="startDate">Data początkowa: </label>
-                        <input class="span2 form-control datepicker" size="16" id="startDate" type="text" value="12-02-2012">
-                        <span class="add-on"><i class="icon-th"></i></span>
-                    </div>
-                    <div class="col-lg-3 input-append date" id="dp4" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                        <label for="startDate">Data końcowa: </label>
-                        <input class="span2 form-control datepicker" size="16" id="endDate" type="text" value="12-02-2012">
-                        <span class="add-on"><i class="icon-th"></i></span>
-                    </div>
-                    <div class="col-lg-6">
-                        <input type="text" class="form-control col-lg-8 campaigns-search reports-search reports-search-last" placeholder="Szukaj">
-                    </div>
-
-                    <ul class="nav nav-pills nav-stacked raports-list">
-                        <li><a href="#">Ilosciowo-kosztowy rabatowe WSZYSTKIE KAMPANIE </a></li>
-                        <li><a href="#">Efektywności Dotarcia i Sprzedaży</a></li>
-                        <li><a href="#">Grupa statusów - NARASTAJĄCY [od akcji:115062 wzwyż]</a></li> 
-                        <li><a href="#">Konsultantci</a></li> 
-                    </ul>
+                    {% if app.request.get('campaign') %}
+                        <div class="col-lg-3 input-append date" id="dp3">
+                            <label for="startDate">Data początkowa: </label>
+                            <input class="span2 form-control datepicker" size="16" id="startDate" type="text" value="12-02-2012">
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <div class="col-lg-3 input-append date" id="dp4">
+                            <label for="startDate">Data końcowa: </label>
+                            <input class="span2 form-control datepicker" size="16" id="endDate" type="text" value="12-02-2012">
+                            <span class="add-on"><i class="icon-th"></i></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control col-lg-8 campaigns-search reports-search reports-search-last" placeholder="Szukaj">
+                        </div>
+                        <ul class="nav nav-pills nav-stacked raports-list">
+                            <li><a href="#">Konsultanci</a></li> 
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
-
             <div class="col-lg-12 panel report-buttons-strip">
                 <div class="panel-body row">
                     <div class="col-lg-9"></div>

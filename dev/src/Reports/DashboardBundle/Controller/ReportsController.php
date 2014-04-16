@@ -15,18 +15,20 @@ class ReportsController extends Controller {
         $this->campaign = filter_input(INPUT_GET, 'campaign');
         
         $breadcrumbs = '<li class="active">Raporty</li>';
-        $campaigns = false;
+        $campaigns_active = false;
+        $campaigns_inactive = false;
         $clients = $this->getCampaignsName();
         
         if ( isset($this->client) ) {
-            $campaigns = $this->getCampaigns($this->client);
+            $campaigns_active = $this->getCampaigns($this->client, 'Aktywna');
+            $campaigns_inactive = $this->getCampaigns($this->client, 'Nieaktywna');
         }
         
-        if ( isset($this->campaign) ) {
-            $this->get('reports_common_konsultant')->getReport();
-        }
+//        if ( isset($this->campaign) ) {
+//            $this->get('reports_common_konsultant')->getReport();
+//        }
         
-        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns' => $campaigns);
+        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive);
     }
     
     public function getCampaignsName() {
@@ -68,11 +70,11 @@ class ReportsController extends Controller {
         }
     }
     
-    public function getCampaigns($client) {
+    public function getCampaigns($client, $status) {
         $client = explode(' ', $client);
         
         $campaigns = $this->em->getConnection()->prepare(
-                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = 'Aktywna'"
+                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = '" . $status . "'"
             );
         
         $campaigns->execute();
