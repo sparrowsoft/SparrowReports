@@ -12,6 +12,7 @@ loadFiles([ //JS and CSS to load when preloading
     "//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900&subset=latin,latin-ext",
     "//brianreavis.github.io/selectize.js/js/selectize.js",
     "/assets/js/globalScripts.js",
+    "/assets/js/jquery.slimscroll.min.js",
     "/assets/js/reportsSearch.js"
 ]);
 

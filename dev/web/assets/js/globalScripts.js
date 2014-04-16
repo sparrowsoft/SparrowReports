@@ -23,6 +23,11 @@ jQuery(document).ready(function(){
    
    $(".report-colum").height($(".report-colum").eq(0).height());
    
+   $('.datepicker').datepicker({
+       format: 'yyyy-mm-dd'
+   });
    
-   $('.datepicker').datepicker();
+    $('#myTabContent').slimScroll({
+        height: '250px'
+   });
 });
