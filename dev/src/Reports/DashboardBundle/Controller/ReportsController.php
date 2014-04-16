@@ -24,11 +24,12 @@ class ReportsController extends Controller {
             $campaigns_inactive = $this->getCampaigns($this->client, 'Nieaktywna');
         }
         
+        $default_date = date('Y-m-d', (strtotime('-1 day' , strtotime(date('Y-m-d')))));
 //        if ( isset($this->campaign) ) {
 //            $this->get('reports_common_konsultant')->getReport();
 //        }
         
-        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive);
+        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $default_date);
     }
     
     public function getCampaignsName() {
@@ -74,21 +75,21 @@ class ReportsController extends Controller {
         $client = explode(' ', $client);
         
         $campaigns = $this->em->getConnection()->prepare(
-                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = '" . $status . "'"
+                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = '" . $status . "' ORDER BY campaign_name DESC"
             );
         
         $campaigns->execute();
         $campaigns_rows = $campaigns->fetchAll();
         
-        $sort = array();
-        
-        foreach ( $campaigns_rows as $row ) {
-            $row = explode('_', $row['campaign_name']);
-            $sort[] = $row[0];
-        }
-        
-        arsort($sort);
-        return $sort;
+//        $sort = array();
+//        
+//        foreach ( $campaigns_rows as $row ) {
+//            $row = explode('_', $row['campaign_name']);
+//            $sort[] = $row[0];
+//        }
+//        
+//        arsort($sort);
+        return $campaigns_rows;
     }
     
     public function getFullCamapignName($campaign) {
