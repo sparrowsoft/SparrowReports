@@ -8,11 +8,13 @@
         <meta name="description" content="Aplikacja raportowa SPARROW Reports">
         <meta name="author" content="SPARROW Contact Center">
         <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.js"></script>
-        <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}" />
-        <link rel="stylesheet" type="text/less" href="{{ asset('assets/less/style.less') }}" />
+
         {% block customLess %}{% endblock %}
         <script src="//cdnjs.cloudflare.com/ajax/libs/headjs/1.0.3/head.min.js" data-headjs-load="{{asset('assets/js/init.js')}}"></script> 
         {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/png" href="{{ asset('assets/images/favicon.png') }}" />
+        <link rel="stylesheet" type="text/less" href="{{ asset('assets/less/style.less') }}" />
+
     </head>
     <body class="{% block bodyClass %}{% endblock %}">
         {% block body %}{% endblock %}
