@@ -25,4 +25,8 @@ jQuery(document).ready(function(){
    
    
    $('.datepicker').datepicker();
+   
+    $('#myTabContent').slimScroll({
+        height: '250px'
+   });
 });
