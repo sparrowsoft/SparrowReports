@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Reports\AuthBundle\ReportsAuthBundle(),
             new Reports\UserBundle\ReportsUserBundle(),
             new Reports\DashboardBundle\ReportsDashboardBundle(),
+            new Reports\ReportsBundle\ReportsReportsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

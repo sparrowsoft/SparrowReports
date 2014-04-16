@@ -55,7 +55,9 @@ class UserController extends Controller
                 
             $update->execute();
             
-            $user->image = $file;
+            if ( !isset($this->action) ) {
+                $user->image = $file;
+            }
         }
         
         if ( $data['password'] != NULL ) {

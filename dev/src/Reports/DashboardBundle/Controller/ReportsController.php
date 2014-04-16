@@ -7,11 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class ReportsController extends Controller {
     public $em;
     public $client;
-   
+    public $campaign;
+    
     public function show() {
         $this->em = $this->getDoctrine()->getManager();
         $this->client = filter_input(INPUT_GET, 'client');
-                
+        $this->campaign = filter_input(INPUT_GET, 'campaign');
+        
         $breadcrumbs = '<li class="active">Raporty</li>';
         $campaigns = false;
         $clients = $this->getCampaignsName();
@@ -20,6 +22,9 @@ class ReportsController extends Controller {
             $campaigns = $this->getCampaigns($this->client);
         }
         
+        if ( isset($this->campaign) ) {
+            $this->get('reports_common_konsultant')->getReport();
+        }
         
         return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns' => $campaigns);
     }
@@ -80,8 +85,28 @@ class ReportsController extends Controller {
             $sort[] = $row[0];
         }
         
-        asort($sort);
+        arsort($sort);
         return $sort;
+    }
+    
+    public function getFullCamapignName($campaign) {
+        $campaign_name = $this->em->getConnection()->prepare(
+                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '" . $campaign . "%'"
+            );
+        
+        $campaign_name->execute();
+        
+        return $campaign_name->fetchAll();
+    }
+    
+    public function getCampaignID($campaign) {
+        $campaign_id = $this->em->getConnection()->prepare(
+                "SELECT campaign_id FROM cc_campaigns WHERE campaign_name LIKE '" . $campaign . "%'"
+            );
+        
+        $campaign_id->execute();
+        
+        return $campaign_id->fetchAll();
     }
 }
 

@@ -52,4 +52,8 @@ services:
         class: Reports\DashboardBundle\Controller\ReportsController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_common_konsultant:
+        class: Reports\ReportsBundle\Controller\KonsultantController
+        calls:
+            - [setContainer, ["@service_container"]]
     
