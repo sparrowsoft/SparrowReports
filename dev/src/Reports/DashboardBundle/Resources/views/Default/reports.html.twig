@@ -8,25 +8,27 @@
             <div class="col-lg-3 report-colum panel panel-info">
                 <div class="panel-heading">Wybierz klienta</div>
                 <div class="panel-body">
-
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a href="#">Raabe</a></li>
-                        <li><a href="#">Srabe</a></li>
-                        <li><a href="#">ING</a></li>
-                        <li><a href="#">Mega Profit</a></li>
-                        <li><a href="#">Ding Dong</a></li>
-                        <li><a href="#">Cotozazjest</a></li>
-                        <li><a href="#">Wsip</a></li>
+                        {% for client in clients %}
+                        <li{{ app.request.get('client') == client ? ' class="active"' : '' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 report-colum panel panel-default">
+            <div class="col-lg-3 report-colum panel {{ app.request.get('client') ? 'panel-info' : 'panel-default' }}">
                 <div class="panel-heading">Wybierz kampanię</div>
                 <div class="panel-body">
-                    <div class="panel-disabled-info">
+                    <div class="panel-disabled-info{{ app.request.get('client') ? ' hidden' : '' }}">
                         <img src="{{ asset('assets/images/logo-disabled.png') }}" alt="sparrow logo" class="disabled-logo"/>
                         <h3>Proszę wybrać klienta</h3>
                     </div>
+                    {% if app.request.get('client') %}
+                    <ul class="nav nav-pills nav-stacked">
+                        {% for campaign in campaigns %}
+                        <li{{ app.request.get('campaign') == campaign ? ' class="active"' : '' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : app.request.get('client'), 'campaign' : campaign }) }}">{{ campaign }}</a></li>    
+                        {% endfor %}
+                    </ul>    
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-6 report-colum panel panel-default">

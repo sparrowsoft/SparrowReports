@@ -6,13 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ReportsController extends Controller {
     public $em;
+    public $client;
    
     public function show() {
         $this->em = $this->getDoctrine()->getManager();
+        $this->client = filter_input(INPUT_GET, 'client');
+                
         $breadcrumbs = '<li class="active">Raporty</li>';
-        $campaigns = $this->getCampaignsName();
+        $campaigns = false;
+        $clients = $this->getCampaignsName();
         
-        return $args = array('breadcrumbs' => $breadcrumbs, 'campaigns' => $campaigns);
+        if ( isset($this->client) ) {
+            $campaigns = $this->getCampaigns($this->client);
+        }
+        
+        
+        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns' => $campaigns);
     }
     
     public function getCampaignsName() {
@@ -31,7 +40,7 @@ class ReportsController extends Controller {
             if ( count($campaign) > 1 ) {
                 $campaign_name = ucfirst($campaign[1]);
                 $campaign_name .= $this->isNumeric($campaign[2]);
-
+                
                 $campaigns_names[] = $this->inArray($campaign_name, $campaigns_names);
             }
         }
@@ -52,6 +61,27 @@ class ReportsController extends Controller {
         if ( !in_array($string, $array) ) {
             return preg_replace('/\s+/', ' ', $string);
         }
+    }
+    
+    public function getCampaigns($client) {
+        $client = explode(' ', $client);
+        
+        $campaigns = $this->em->getConnection()->prepare(
+                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = 'Aktywna'"
+            );
+        
+        $campaigns->execute();
+        $campaigns_rows = $campaigns->fetchAll();
+        
+        $sort = array();
+        
+        foreach ( $campaigns_rows as $row ) {
+            $row = explode('_', $row['campaign_name']);
+            $sort[] = $row[0];
+        }
+        
+        asort($sort);
+        return $sort;
     }
 }
 
