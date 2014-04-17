@@ -25,7 +25,7 @@ class ReportsController extends Controller {
         }
         
         $date['default'] = date('Y-m-d');
-        //$date['yesterday'] = date('Y-m-d', strtotime('-1 day'), date('Y-m-d'));
+        $date['yesterday'] = date('Y-m-d',(strtotime( '-1 day', strtotime(date('Y-m-d')))));
         
         return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $date);
     }
