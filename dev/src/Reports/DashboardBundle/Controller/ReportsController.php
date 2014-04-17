@@ -24,9 +24,10 @@ class ReportsController extends Controller {
             $campaigns_inactive = $this->getCampaigns($this->client, 'Nieaktywna');
         }
         
-        $default_date = date('Y-m-d');
+        $date['default'] = date('Y-m-d');
+        //$date['yesterday'] = date('Y-m-d', strtotime('-1 day'), date('Y-m-d'));
         
-        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $default_date);
+        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $date);
     }
     
     public function getCampaignsName() {
