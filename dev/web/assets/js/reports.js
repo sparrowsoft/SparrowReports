@@ -32,6 +32,8 @@ jQuery('li.report-li').click(function(){
    }
 });
 
+
+//create url
 jQuery('.get-report').click(function() {
    var url = location.href;
    var report = jQuery('li.report-li.active').children('a').attr('href');
@@ -39,4 +41,20 @@ jQuery('.get-report').click(function() {
    var end = jQuery('#endDate').val();
    
    location.href = url + '&report=' + report + '&from=' + start + '&to=' + end;
+});
+
+
+//button yesterday
+jQuery('.btn-wczoraj').click(function(){
+    console.log(jQuery('.btn-wczoraj').text());
+    if(jQuery('.btn-wczoraj').text() === 'Wczoraj'){
+       jQuery('.btn-wczoraj').text('Dzisiaj');
+       jQuery('#startDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
+       jQuery('#endDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
+    }else{
+        jQuery('.btn-wczoraj').text('Wczoraj');
+        jQuery('#startDate').datepicker('setValue', jQuery('#startDate').attr('value'));
+        jQuery('#endDate').datepicker('setValue', jQuery('#startDate').attr('value'));
+    }
+    
 });
