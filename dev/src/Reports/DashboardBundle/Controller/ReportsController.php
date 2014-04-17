@@ -8,15 +8,18 @@ class ReportsController extends Controller {
     public $em;
     public $client;
     public $campaign;
+    public $report;
     
     public function show() {
         $this->em = $this->getDoctrine()->getManager();
         $this->client = filter_input(INPUT_GET, 'client');
         $this->campaign = filter_input(INPUT_GET, 'campaign');
+        $this->report = filter_input(INPUT_GET, 'report');
         
         $breadcrumbs = '<li class="active">Raporty</li>';
         $campaigns_active = false;
         $campaigns_inactive = false;
+        $html_report = false;
         $clients = $this->getCampaignsName();
         
         if ( isset($this->client) ) {
@@ -24,9 +27,14 @@ class ReportsController extends Controller {
             $campaigns_inactive = $this->getCampaigns($this->client, 'Nieaktywna');
         }
         
+        if ( isset($this->report) ) {
+            $html_report = $this->get($this->report)->getReport();
+            var_dump($html_report);
+        }
+        
         $date['default'] = date('Y-m-d');
         $date['yesterday'] = date('Y-m-d',(strtotime( '-1 day', strtotime(date('Y-m-d')))));
-        
+                
         return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $date);
     }
     

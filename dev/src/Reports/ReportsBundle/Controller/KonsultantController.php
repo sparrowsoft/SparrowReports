@@ -9,12 +9,16 @@ class KonsultantController extends Controller {
     public $campaign; 
     public $campaign_name;
     public $campaign_id;
+    public $start;
+    public $end;
     
     public function getReport() {
         $this->campaign = filter_input(INPUT_GET, 'campaign');
         $this->em = $this->getDoctrine()->getManager();
         $this->campaign_name = $this->get('reports_service')->getFullCamapignName($this->campaign);
         $this->campaign_id = $this->get('reports_service')->getCampaignID($this->campaign);
+        $this->start = filter_input(INPUT_GET, 'from');
+        $this->end = filter_input(INPUT_GET, 'to');
         
         $this->getWorkTime();
     }
@@ -30,7 +34,7 @@ class KonsultantController extends Controller {
                     MAX(cc_calllog.calllog_makecall_result_time) as AGENT_MAX_TIME, 
                     (MAX(cc_calllog.calllog_makecall_result_time) - MIN(cc_calllog.calllog_makecall_result_time )) AS AGENT_WORK_TIME
                 FROM cc_calllog
-                WHERE calllog_campaign = " . $this->campaign_id[0]['campaign_id'] . " AND cc_calllog.calllog_makecall_result_time BETWEEN '2014-04-15 00:00:00' AND '2014-04-15 23:59:59'
+                WHERE calllog_campaign = " . $this->campaign_id[0]['campaign_id'] . " AND cc_calllog.calllog_makecall_result_time BETWEEN '" . $this->start . " 00:00:00' AND '" . $this->end . " 23:59:59'
                     AND cc_calllog.calllog_agentid IS NOT NULL
                 GROUP BY cc_calllog.calllog_agentid
             ) temp
@@ -39,7 +43,7 @@ class KonsultantController extends Controller {
         $work_time = $this->em->getConnection()->prepare($work_time_query);
         $work_time->execute();
         
-        var_dump($work_time->fetchAll());
+        return $work_time->fetchAll();
     }
 }
 
