@@ -28,6 +28,6 @@ jQuery(document).ready(function(){
    });
    
     $('#myTabContent').slimScroll({
-        height: '250px'
+        height: '220px'
    });
 });

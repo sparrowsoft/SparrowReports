@@ -8,7 +8,7 @@
             <div class="col-lg-3 report-colum panel panel-info">
                 <div class="panel-heading">Wybierz klienta</div>
                 <div class="panel-body">
-                    <input type="text" class="form-control col-lg-8 clients-search reports-search" placeholder="Szukaj">
+                    <div><input type="text" class="form-control col-lg-8 clients-search reports-search" placeholder="Szukaj"></div>
                     <ul class="nav nav-pills nav-stacked">
                         {% for client in clients %}
                             <li{{ app.request.get('client') == client ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
@@ -24,7 +24,7 @@
                         <h3>Proszę wybrać klienta</h3>
                     </div>
                     {% if app.request.get('client') %}
-                        <input type="text" class="form-control col-lg-8 campaigns-search reports-search" placeholder="Szukaj">
+                        <div><input type="text" class="form-control col-lg-8 campaigns-search reports-search" placeholder="Szukaj"></div>
                         <ul class="nav nav-tabs" style="margin-bottom: 15px;">
                             <li class="active"><a href="#active" data-toggle="tab">Aktywne</a></li>
                             <li class=""><a href="#inactive" data-toggle="tab">Niekatywne</a></li>
@@ -73,7 +73,11 @@
                             <input type="text" class="form-control col-lg-8 campaigns-search reports-search reports-search-last" placeholder="Szukaj">
                         </div>
                         <ul class="nav nav-pills nav-stacked raports-list">
-                            <li><a href="#">Konsultanci</a></li> 
+                            <li class="report-li"><a href="#">Konsultanci</a></li>
+                            <li class="report-li"><a href="#">Konsultanci</a></li>
+                            <li class="report-li"><a href="#">Konsultanci</a></li>
+                            <li class="report-li"><a href="#">Konsultanci</a></li>
+                            <li class="report-li"><a href="#">Konsultanci</a></li>
                         </ul>
                     {% endif %}
                 </div>
