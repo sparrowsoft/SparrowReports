@@ -29,13 +29,12 @@ class ReportsController extends Controller {
         
         if ( isset($this->report) ) {
             $html_report = $this->get($this->report)->getReport();
-            var_dump($html_report);
         }
         
         $date['default'] = date('Y-m-d');
         $date['yesterday'] = date('Y-m-d',(strtotime( '-1 day', strtotime(date('Y-m-d')))));
                 
-        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $date);
+        return $args = array('breadcrumbs' => $breadcrumbs, 'clients' => $clients, 'campaigns_active' => $campaigns_active, 'campaigns_inactive' => $campaigns_inactive, 'date' => $date, 'report' => $html_report);
     }
     
     public function getCampaignsName() {

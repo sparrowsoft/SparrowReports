@@ -95,5 +95,16 @@
                 </div>
             </div>
         </div>
+        {% if report %}
+        <div class="row">
+            <div class="col-lg-12 panel">
+                <div class="panel-body row">
+                    <div class="col-lg-12">
+                    {{ dump(report) }}
+                    </div>
+                </div>    
+            </div>
+        </div>
+        {% endif %}            
     </div>
 {% endblock %}

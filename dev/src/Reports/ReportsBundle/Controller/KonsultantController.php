@@ -20,7 +20,7 @@ class KonsultantController extends Controller {
         $this->start = filter_input(INPUT_GET, 'from');
         $this->end = filter_input(INPUT_GET, 'to');
         
-        $this->getWorkTime();
+        return $this->getWorkTime();
     }
     
     public function getWorkTime() {
