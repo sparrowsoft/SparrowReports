@@ -21,7 +21,7 @@ class KonsultantController extends Controller {
         $this->end = filter_input(INPUT_GET, 'to');
         
         $result = array(
-            'header' => 'Konsultanci',
+            'header' => 'Praca telemarketerów',
             'table_head' => $this->getTableHead(),
             'table_body' => $this->getTableBody()
         );

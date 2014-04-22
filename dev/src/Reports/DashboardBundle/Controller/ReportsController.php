@@ -52,7 +52,10 @@ class ReportsController extends Controller {
             
             if ( count($campaign) > 1 ) {
                 $campaign_name = ucfirst($campaign[1]);
-                $campaign_name .= $this->isNumeric($campaign[2]);
+                
+                if ( isset($campaign[2]) ) {
+                    $campaign_name .= $this->isNumeric($campaign[2]);
+                }
                 
                 $campaigns_names[] = $this->inArray($campaign_name, $campaigns_names);
             }
