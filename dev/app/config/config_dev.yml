@@ -56,4 +56,8 @@ services:
         class: Reports\ReportsBundle\Controller\KonsultantController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_raabe_efficiency:
+        class: Reports\ReportsBundle\Controller\Raabe\EfficiencyController
+        calls:
+            - [setContainer, ["@service_container"]]
     
