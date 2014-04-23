@@ -5,15 +5,17 @@
     {% include "header.html.twig" %}    
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 report-colum panel {{ app.request.get('client') ? 'panel-info' : 'panel-primary' }}">
+            <div class="col-lg-3 report-colum panel choose-client-column {{ app.request.get('client') ? 'panel-info' : 'panel-primary' }}">
                 <div class="panel-heading">Wybierz klienta</div>
                 <div class="panel-body">
                     <div><input type="text" class="form-control col-lg-8 clients-search reports-search" placeholder="Szukaj"></div>
-                    <ul class="nav nav-pills nav-stacked">
-                        {% for client in clients %}
-                            <li{{ app.request.get('client') == client ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
-                            {% endfor %}
-                    </ul>
+                    <div class="scrolling">
+                        <ul class="nav nav-pills nav-stacked">
+                            {% for client in clients %}
+                                <li{{ app.request.get('client') == client ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
+                                {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
             {% if app.request.get('client') and app.request.get('campaign') is empty %}
@@ -80,16 +82,29 @@
                                                         <input type="text" class="form-control col-lg-8 campaigns-search reports-search reports-search-last" placeholder="Szukaj">
                                                     </div>
                                                     <ul class="nav nav-pills nav-stacked raports-list">
-                                                        <li class="report-li"><a href="reports_common_konsultant">Praca telemarketerów</a></li>
+                                                        <li class="report-li">
+                                                            <a href="reports_common_konsultant">Praca telemarketerów</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>
+                                                            
+                                                        </li>
+                                                        
                                                     </ul>
                                                 {% endif %}
                                             </div>
                                         </div>
                                         <div class="col-lg-12 panel report-buttons-strip">
                                             <div class="panel-body row">
-                                                <div class="col-lg-9"></div>
+                                                <div class="col-lg-9">
+                                                    <div class="progress progress-striped active reports-progress">
+                                                        <div class="progress-bar" style="width: 100%">
+                                                            <span><strong>Proszę czekać: </strong> Trwa pobieranie informacji z bazy danych</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="col-lg-3">
-                                                    <button type="button" class="pull-right btn btn-disabled get-report" disabled>Generuj html</button>
+                                                    <button type="button" class="pull-right btn btn-disabled get-report" disabled onclick="$('.reports-progress').fadeIn(100);">Generuj html</button>
                                                 </div>    
                                             </div>
                                         </div>
@@ -99,6 +114,7 @@
                                             <div class="col-lg-12 panel raport-strip panel-default">
                                                 <div class="panel-heading">
                                                     <strong>{{ report.header }}</strong> - {{ app.request.get('campaign') }} (od {{ app.request.get('from') }} do {{ app.request.get('to') }} )
+                                                    
                                                     <a href="" class="btn btn-xs pull-right" download="{{ report.header }}.xls" onclick="tableToExcel('report-results', '{{ app.request.get('campaign') }}', this)">Pobierz *.xls</a>
                                                 </div>
                                                 <div class="panel-body row">

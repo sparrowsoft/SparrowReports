@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
         console.log(jQuery('#questionModal .btn-warning').attr('onclick', "location.href='" + deletePath + "&id=" + userId + "'"));
     });
 
-    $(".report-colum").height($(".report-colum").eq(0).height());
+    $(".report-colum").height(400);
 
     $('.datepicker').datepicker({
         format: 'yyyy-mm-dd'
@@ -26,6 +26,11 @@ jQuery(document).ready(function() {
     $('#myTabContent').slimScroll({
         height: '220px'
     });
+    $('.scrolling').slimScroll({
+        height: '280px'
+    });
+    
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 var tableToExcel = (function() {
@@ -40,3 +45,13 @@ var tableToExcel = (function() {
     element.href = uri + base64(format(template, ctx));
   }
 })()
+
+
+jQuery('.report-li button').click(function(event){
+    jQuery(this).toggleClass('faved');
+    //jQuery(this).toggleClass('disabled');
+    event.stopPropagation();
+});
+
+
+
