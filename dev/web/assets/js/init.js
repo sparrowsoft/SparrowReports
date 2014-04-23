@@ -13,6 +13,8 @@ loadFiles([ //JS and CSS to load when preloading
     "//brianreavis.github.io/selectize.js/js/selectize.js",
     "/assets/js/globalScripts.js",
     "/assets/js/jquery.slimscroll.min.js",
+
+    
     "/assets/js/reports.js"
 ]);
 
