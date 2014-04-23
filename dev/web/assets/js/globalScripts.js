@@ -36,7 +36,6 @@ var tableToExcel = (function() {
   return function(table, name, element) {
     if (!table.nodeType) table = document.getElementById(table)
     var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-    console.log(element);
     element.href = uri + base64(format(template, ctx));
   }
 })()
