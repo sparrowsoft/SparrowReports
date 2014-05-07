@@ -88,12 +88,20 @@
                                                                <span class="glyphicon glyphicon-heart"></span>
                                                             </button>         
                                                         </li>
+                                                        {% if app.request.get('client') == 'Raabe' %}
                                                         <li class="report-li">
                                                             <a href="reports_raabe_efficiency">Efektywność dotarcia i sprzedaży</a>
                                                             <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
                                                                <span class="glyphicon glyphicon-heart"></span>
                                                             </button>         
                                                         </li>   
+                                                        <li class="report-li">
+                                                            <a href="reports_raabe_status_group">Grupa statusów</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        {% endif %}
                                                     </ul>
                                                 {% endif %}
                                             </div>

@@ -60,4 +60,8 @@ services:
         class: Reports\ReportsBundle\Controller\Raabe\EfficiencyController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_raabe_status_group:
+        class: Reports\ReportsBundle\Controller\Raabe\StatusGroupController
+        calls:
+            - [setContainer, ["@service_container"]]
     
