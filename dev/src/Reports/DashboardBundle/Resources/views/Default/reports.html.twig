@@ -11,9 +11,11 @@
                     <div><input type="text" class="form-control col-lg-8 clients-search reports-search" placeholder="Szukaj"></div>
                     <div class="scrolling">
                         <ul class="nav nav-pills nav-stacked">
-                            {% for client in clients %}
+                            <!--{% for client in clients %}
                                 <li{{ app.request.get('client') == client ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
-                                {% endfor %}
+                            {% endfor %}-->
+                            <li{{ app.request.get('client') == 'Raabe' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'Raabe' }) }}">Raabe</a></li>
+                            <li{{ app.request.get('client') == 'WIP' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'WIP' }) }}">WIP</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +52,7 @@
                                                             <ul class="nav nav-pills nav-stacked">
                                                                 {% for campaign in campaigns_inactive %}
                                                                     <li{{ app.request.get('campaign') == campaign.campaign_name ? ' class="campaigns-li active"' : ' class="campaigns-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : app.request.get('client'), 'campaign' : campaign.campaign_name }) }}">{{ campaign.campaign_name }}</a></li>    
-                                                                    {% endfor %}
+                                                                {% endfor %}
                                                             </ul> 
                                                         </div>
                                                     </div>
@@ -82,12 +84,20 @@
                                                         <input type="text" class="form-control col-lg-8 campaigns-search reports-search reports-search-last" placeholder="Szukaj">
                                                     </div>
                                                     <ul class="nav nav-pills nav-stacked raports-list">
+                                                        {% if app.request.get('client') == 'WIP' %}
                                                         <li class="report-li">
-                                                            <a href="reports_common_konsultant">Praca telemarketerów</a>
+                                                            <a href="reports_wip_konsultant">Praca telemarketerów</a>
                                                             <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
                                                                <span class="glyphicon glyphicon-heart"></span>
                                                             </button>         
                                                         </li>
+                                                        <li class="report-li">
+                                                            <a href="reports_wip_status_group">Grupa statusów</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        {% endif %}
                                                         {% if app.request.get('client') == 'Raabe' %}
                                                         <li class="report-li">
                                                             <a href="reports_raabe_efficiency">Efektywność dotarcia i sprzedaży</a>

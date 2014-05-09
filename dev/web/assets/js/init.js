@@ -1,21 +1,21 @@
 loadFiles([ //JS and CSS to load when preloading
-    "/assets/js/lessInit.js",
+    "/web/assets/js/lessInit.js",
     "//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.js",
     "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js",
     "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js",
     
     "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css",
     
-    "/assets/js/bootstrap-datepicker.js",
+    "/web/assets/js/bootstrap-datepicker.js",
 
-    "/assets/js/getBootstrapTheme.js",
+    "/web/assets/js/getBootstrapTheme.js",
     "//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900&subset=latin,latin-ext",
     "//brianreavis.github.io/selectize.js/js/selectize.js",
-    "/assets/js/globalScripts.js",
-    "/assets/js/jquery.slimscroll.min.js",
+    "/web/assets/js/globalScripts.js",
+    "/web/assets/js/jquery.slimscroll.min.js",
 
     
-    "/assets/js/reports.js"
+    "/web/assets/js/reports.js"
 ]);
 
 //init functions

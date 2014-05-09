@@ -13,14 +13,3 @@ _configurator:
 _main:
     resource: routing.yml
     
-login:
-    path:      /login
-    defaults:  { _controller: ReportsUserBundle:User:login }
-
-logout:
-    path:      /logout
-    defaults:  { _controller: ReportsUserBundle:User:logout }
-    
-dashboard:
-    path: /dashboard/{page}
-    defaults: { _controller: ReportsDashboardBundle:Default:index }

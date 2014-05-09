@@ -82,7 +82,7 @@ class EfficiencyController extends Controller {
         $table_body .= '<tr><td>1</td><td>' . $pp1 . '</td><td>' . ((count($this->getSales()) != 0) ? (str_replace('.', ',', round(($pp1/count($this->getSales()))*100,2))) . '%' : '0,0%') . '</td><td>' . $p1 . '</td><td>' . ((count($this->getreach()) != 0) ? (str_replace('.', ',', round(($p1/count($this->getReach()))*100,2))) . '%' : '0,0%') . '</td></tr>';
         $table_body .= '<tr><td>2</td><td>' . $pp2 . '</td><td>' . ((count($this->getSales()) != 0) ? (str_replace('.', ',', round(($pp2/count($this->getSales()))*100,2))) . '%' : '0,0%') . '</td><td>' . $p2 . '</td><td>' . ((count($this->getReach()) != 0) ? (str_replace('.', ',', round(($p2/count($this->getReach()))*100,2))) . '%' : '0,0%') . '</td></tr>';
         $table_body .= '<tr><td>3</td><td>' . $pp3 . '</td><td>' . ((count($this->getSales()) != 0) ? (str_replace('.', ',', round(($pp3/count($this->getSales()))*100,2))) . '%' : '0,0%') . '</td><td>' . $p3 . '</td><td>' . ((count($this->getReach()) != 0) ? (str_replace('.', ',', round(($p3/count($this->getReach()))*100,2))) . '%' : '0,0%') . '</td></tr>';
-        $table_body .= '<tr><td></td><td><strong>' . count($this->getSales()) . '</strong></td><td></td><td><strong>' . count($this->getReach()) . '</strong></td><td></td></tr>';
+        $table_body .= '<tr style="font-weight: bold"><td>#</td><td>' . count($this->getSales()) . '</td><td>-</td><td>' . count($this->getReach()) . '</td><td>-</td></tr>';
         
         return $table_body;
     }

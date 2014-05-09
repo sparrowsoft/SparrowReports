@@ -67,3 +67,42 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+services:
+    user_service:
+        class: Reports\UserBundle\Controller\UserController
+        calls:
+            - [setContainer, ["@service_container"]]
+    profile_service:
+        class: Reports\DashboardBundle\Controller\ProfileController
+        calls:
+            - [setContainer, ["@service_container"]]     
+    personel_service:
+        class: Reports\DashboardBundle\Controller\PersonelController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_service:
+        class: Reports\DashboardBundle\Controller\ReportsController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_common_konsultant:
+        class: Reports\ReportsBundle\Controller\KonsultantController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_wip_konsultant:
+        class: Reports\ReportsBundle\Controller\WIP\KonsultantController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_raabe_efficiency:
+        class: Reports\ReportsBundle\Controller\Raabe\EfficiencyController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_raabe_status_group:
+        class: Reports\ReportsBundle\Controller\Raabe\StatusGroupController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_wip_status_group:
+        class: Reports\ReportsBundle\Controller\WIP\StatusGroupController
+        calls:
+            - [setContainer, ["@service_container"]]
+    

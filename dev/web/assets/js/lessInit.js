@@ -7,5 +7,5 @@ less = {
     functions: {},
     dumpLineNumbers: "comments",
     relativeUrls: true,
-    rootpath: "http://reports.bposparrow.com/assets"
+    rootpath: "http://reports.bposparrow.com/web/assets"
 };
