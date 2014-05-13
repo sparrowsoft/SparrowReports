@@ -52,7 +52,7 @@ class KonsultantController extends Controller {
     }
     
     public function WorkTime($id) {
-        $closed_query = "SELECT calllog_odbior, calllog_koniec FROM cc_calllog WHERE
+        $closed_query = "SELECT calllog_callcode_id, calllog_odbior, calllog_koniec FROM cc_calllog WHERE
                 calllog_agentid = " . $id . " AND calllog_koniec IS NOT NULL AND calllog_campaign = " . $this->campaign_id[0]['campaign_id'] . "
                 AND calllog_makecall_time BETWEEN '" . $this->start . " 00:00:00' AND '" . $this->end . " 23:59:59'";
         
@@ -68,7 +68,16 @@ class KonsultantController extends Controller {
             $time = strtotime($end_time) - strtotime($start_time);
 
             $work_time += $time;
-            $counter++;
+            
+            if ( $date['calllog_callcode_id'] != NULL ) {
+                if ( $date['calllog_callcode_id'] === 139 OR $date['calllog_callcode_id'] === 117 
+                        OR $date['calllog_callcode_id'] === 127 OR $date['calllog_callcode_id'] === 137 OR
+                        $date['calllog_callcode_id'] === 135 OR $date['calllog_callcode_id'] === 133 OR 
+                        $date['calllog_callcode_id'] === 132 OR $date['calllog_callcode_id'] === 134 OR 
+                        $date['calllog_callcode_id'] === 136 OR $date['calllog_callcode_id'] === 138) {
+                    $counter++;
+                }
+            }
         }
        
         return array('target' => $counter, 'work_time' => round(($work_time/3600), 2));

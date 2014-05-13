@@ -85,8 +85,8 @@ services:
         class: Reports\DashboardBundle\Controller\ReportsController
         calls:
             - [setContainer, ["@service_container"]]
-    reports_common_konsultant:
-        class: Reports\ReportsBundle\Controller\KonsultantController
+    reports_raabe_konsultant:
+        class: Reports\ReportsBundle\Controller\Raabe\KonsultantController
         calls:
             - [setContainer, ["@service_container"]]
     reports_wip_konsultant:
@@ -99,6 +99,10 @@ services:
             - [setContainer, ["@service_container"]]
     reports_raabe_status_group:
         class: Reports\ReportsBundle\Controller\Raabe\StatusGroupController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_raabe_ik_all_rabat:
+        class: Reports\ReportsBundle\Controller\Raabe\IKAllRabatController
         calls:
             - [setContainer, ["@service_container"]]
     reports_wip_status_group:
