@@ -22,14 +22,8 @@ jQuery('li.report-li a').click(function( event ){
     event.preventDefault();
 });
 jQuery('li.report-li').click(function(){
-   jQuery(this).toggleClass('active');
-   if(jQuery('.raports-list li.active').length){
-       jQuery('.report-buttons-strip .btn-disabled').removeClass('btn-disabled').prop('disabled', false);
-       jQuery('.report-buttons-strip .btn:not(.btn-primary)').addClass('btn-primary');
-   }else{
-       jQuery('.report-buttons-strip .btn-primary').removeClass('btn-primary');
-       jQuery('.report-buttons-strip .btn:not(.btn-disabled)').addClass('btn-disabled').prop('disabled', true);
-   }
+   jQuery('li.report-li').removeClass('active');
+   jQuery(this).addClass('active');
 });
 
 

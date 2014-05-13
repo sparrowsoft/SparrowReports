@@ -19,9 +19,6 @@ jQuery(document).ready(function() {
 
     $(".report-colum").height(400);
 
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
 
     $('#myTabContent').slimScroll({
         height: '220px'
@@ -54,3 +51,13 @@ jQuery('.report-li button').click(function(event){
 
 
 
+//datepicker fix
+var myPicker = $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+var inputs = jQuery('.form-control.datepicker');
+var datepickers = jQuery(".datepicker.dropdown-menu");
+inputs.last().mousedown(function(){
+   datepickers.eq(0).hide();
+});
+inputs.eq(0).mousedown(function(){
+    datepickers.last().hide();
+});
