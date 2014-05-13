@@ -15,8 +15,6 @@ jQuery('.reports-search').keyup(function( event ){
     }
 }); 
 
-
-
 //select multiple reports
 jQuery('li.report-li a').click(function( event ){
     event.preventDefault();
@@ -25,7 +23,6 @@ jQuery('li.report-li').click(function(){
    jQuery('li.report-li').removeClass('active');
    jQuery(this).addClass('active');
 });
-
 
 //create url
 jQuery('.get-report').click(function() {
@@ -36,7 +33,6 @@ jQuery('.get-report').click(function() {
    
    location.href = url + '&report=' + report + '&from=' + start + '&to=' + end;
 });
-
 
 //button yesterday
 jQuery('.btn-wczoraj').click(function(){
@@ -50,5 +46,4 @@ jQuery('.btn-wczoraj').click(function(){
         jQuery('#startDate').datepicker('setValue', jQuery('#startDate').attr('value'));
         jQuery('#endDate').datepicker('setValue', jQuery('#startDate').attr('value'));
     }
-    
 });
