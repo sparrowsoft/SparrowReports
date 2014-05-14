@@ -36,9 +36,11 @@ jQuery('.get-report').click(function() {
 
 //button yesterday
 jQuery('.btn-wczoraj').click(function(){
+    jQuery('.btn-wczoraj').toggleClass('btn-info');
     console.log(jQuery('.btn-wczoraj').text());
     if(jQuery('.btn-wczoraj').text() === 'Wczoraj'){
        jQuery('.btn-wczoraj').text('Dzisiaj');
+       
        jQuery('#startDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
        jQuery('#endDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
     }else{
