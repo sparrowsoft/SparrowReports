@@ -22,6 +22,8 @@ jQuery('li.report-li a').click(function( event ){
 jQuery('li.report-li').click(function(){
    jQuery('li.report-li').removeClass('active');
    jQuery(this).addClass('active');
+   jQuery('.btn.get-report').removeAttr('disabled').removeClass('btn-disabled')
+           .addClass('btn-primary');
 });
 
 //create url
