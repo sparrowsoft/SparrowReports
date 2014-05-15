@@ -14,8 +14,10 @@
                             <!--{% for client in clients %}
                                 <li{{ app.request.get('client') == client ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : client }) }}">{{ client }}</a></li>    
                             {% endfor %}-->
+                            <li{{ app.request.get('client') == 'Supermemo' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'Supermemo' }) }}">Supermemo</a></li>
                             <li{{ app.request.get('client') == 'Raabe' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'Raabe' }) }}">Raabe</a></li>
                             <li{{ app.request.get('client') == 'WIP' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'WIP' }) }}">WIP</a></li>
+                            <li{{ app.request.get('client') == 'WS Finance' ? ' class="campaigns-li active"' : ' class="clients-li"' }}><a href="{{ path('dashboard', { 'page' : 'reports', 'client' : 'WS Finance' }) }}">WS Finance</a></li>
                         </ul>
                     </div>
                 </div>
@@ -119,6 +121,34 @@
                                                         </li>
                                                         <li class="report-li">
                                                             <a href="reports_raabe_ik_all_rabat">Raport ilościowo-kosztowy (wszystkie kampanie rabatowe) - w budowie</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        {% endif %}
+                                                        {% if app.request.get('client') == 'Supermemo' %}
+                                                        <li class="report-li">
+                                                            <a href="reports_supermemo_daily_operations">Operacje dzienne</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        <li class="report-li">
+                                                            <a href="reports_supermemo_statuses">Grupa statusów</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        {% endif %}
+                                                        {% if app.request.get('client') == 'WS Finance' %}
+                                                        <li class="report-li">
+                                                            <a href="reports_wsfinance_emails">Adresy e-mail i zamknięcia</a>
+                                                            <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
+                                                               <span class="glyphicon glyphicon-heart"></span>
+                                                            </button>         
+                                                        </li>
+                                                        <li class="report-li">
+                                                            <a href="reports_wsfinance_operations">Operacje dzienne</a>
                                                             <button type="button" class="btn btn-default btn" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dodaj do kokpitu">
                                                                <span class="glyphicon glyphicon-heart"></span>
                                                             </button>         

@@ -10,26 +10,18 @@ jQuery(document).ready(function() {
     //deleting user modal
     jQuery('.modal-delete-user').click(function() {
         jQuery('#questionModal button.user-name-modal').html($(this).parent().parent().children('.user-name').html());
-
         var userId = jQuery(this).attr('data-user');
         var deletePath = jQuery('#questionModal .btn-warning').attr('onclick');
-
         console.log(jQuery('#questionModal .btn-warning').attr('onclick', "location.href='" + deletePath + "&id=" + userId + "'"));
     });
 
     $(".report-colum").height(400);
-
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'
-    });
-
     $('#myTabContent').slimScroll({
         height: '220px'
     });
     $('.scrolling').slimScroll({
         height: '280px'
     });
-    
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -52,5 +44,16 @@ jQuery('.report-li button').click(function(event){
     event.stopPropagation();
 });
 
+//datepicker fix
+var myPicker = $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+var inputs = jQuery('.form-control.datepicker');
+var datepickers = jQuery(".datepicker.dropdown-menu");
 
+inputs.last().mousedown(function(){
+   datepickers.eq(0).hide();
+});
+
+inputs.eq(0).mousedown(function(){
+    datepickers.last().hide();
+});
 

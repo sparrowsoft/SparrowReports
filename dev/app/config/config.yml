@@ -109,4 +109,20 @@ services:
         class: Reports\ReportsBundle\Controller\WIP\StatusGroupController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_supermemo_daily_operations:
+        class: Reports\ReportsBundle\Controller\Supermemo\DailyOperationsController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_supermemo_statuses:
+        class: Reports\ReportsBundle\Controller\Supermemo\StatusesController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_wsfinance_emails:
+        class: Reports\ReportsBundle\Controller\WSFinance\EmailsController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_wsfinance_operations:
+        class: Reports\ReportsBundle\Controller\WSFinance\DailyOperationsController
+        calls:
+            - [setContainer, ["@service_container"]]
     
