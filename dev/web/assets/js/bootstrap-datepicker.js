@@ -88,6 +88,9 @@
 	Datepicker.prototype = {
 		constructor: Datepicker,
 		
+                customClass: function(myClass){
+                    this.picker.addClass(myClass);
+                },
 		show: function(e) {
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();

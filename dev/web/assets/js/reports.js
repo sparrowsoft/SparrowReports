@@ -15,23 +15,14 @@ jQuery('.reports-search').keyup(function( event ){
     }
 }); 
 
-
-
 //select multiple reports
 jQuery('li.report-li a').click(function( event ){
     event.preventDefault();
 });
 jQuery('li.report-li').click(function(){
-   jQuery(this).toggleClass('active');
-   if(jQuery('.raports-list li.active').length){
-       jQuery('.report-buttons-strip .btn-disabled').removeClass('btn-disabled').prop('disabled', false);
-       jQuery('.report-buttons-strip .btn:not(.btn-primary)').addClass('btn-primary');
-   }else{
-       jQuery('.report-buttons-strip .btn-primary').removeClass('btn-primary');
-       jQuery('.report-buttons-strip .btn:not(.btn-disabled)').addClass('btn-disabled').prop('disabled', true);
-   }
+   jQuery('li.report-li').removeClass('active');
+   jQuery(this).addClass('active');
 });
-
 
 //create url
 jQuery('.get-report').click(function() {
@@ -43,12 +34,13 @@ jQuery('.get-report').click(function() {
    location.href = url + '&report=' + report + '&from=' + start + '&to=' + end;
 });
 
-
 //button yesterday
 jQuery('.btn-wczoraj').click(function(){
+    jQuery('.btn-wczoraj').toggleClass('btn-info');
     console.log(jQuery('.btn-wczoraj').text());
     if(jQuery('.btn-wczoraj').text() === 'Wczoraj'){
        jQuery('.btn-wczoraj').text('Dzisiaj');
+       
        jQuery('#startDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
        jQuery('#endDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
     }else{
@@ -56,5 +48,4 @@ jQuery('.btn-wczoraj').click(function(){
         jQuery('#startDate').datepicker('setValue', jQuery('#startDate').attr('value'));
         jQuery('#endDate').datepicker('setValue', jQuery('#startDate').attr('value'));
     }
-    
 });
