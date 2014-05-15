@@ -1,51 +1,59 @@
-//Search in blocks
-jQuery('.reports-search').keyup(function( event ){
-    var searchStr = jQuery(this).val();
-    var values = jQuery(this).parent().parent().find('li.campaigns-li, li.clients-li, li.report-li');
-    if(searchStr !== ""){
-        values.addClass('hidden');
-        values.each(function(){
-           //console.log(jQuery(this).text().toLowerCase().replace(' ', ''));
-           if(jQuery(this).text().toLowerCase().replace(' ', '').search(searchStr.toLowerCase().replace(' ', '')) !== -1){
-                jQuery(this).removeClass('hidden'); 
-            }
-        });
-    }else{
-       values.removeClass('hidden');
-    }
-}); 
+jQuery(document).ready(function() {
+    jQuery('#form_password').blur(function() {
+        if ($('#form_password').val() !== "") {
+            $('#form_repeat_password').attr('required', 'required');
+        } else {
+            $('#form_repeat_password').removeAttr('required');
+        }
+    });
 
-//select multiple reports
-jQuery('li.report-li a').click(function( event ){
-    event.preventDefault();
-});
-jQuery('li.report-li').click(function(){
-   jQuery('li.report-li').removeClass('active');
-   jQuery(this).addClass('active');
-});
+    //deleting user modal
+    jQuery('.modal-delete-user').click(function() {
+        jQuery('#questionModal button.user-name-modal').html($(this).parent().parent().children('.user-name').html());
+        var userId = jQuery(this).attr('data-user');
+        var deletePath = jQuery('#questionModal .btn-warning').attr('onclick');
+        console.log(jQuery('#questionModal .btn-warning').attr('onclick', "location.href='" + deletePath + "&id=" + userId + "'"));
+    });
 
-//create url
-jQuery('.get-report').click(function() {
-   var url = location.href;
-   var report = jQuery('li.report-li.active').children('a').attr('href');
-   var start = jQuery('#startDate').val();
-   var end = jQuery('#endDate').val();
-   
-   location.href = url + '&report=' + report + '&from=' + start + '&to=' + end;
+    $(".report-colum").height(400);
+    $('#myTabContent').slimScroll({
+        height: '220px'
+    });
+    $('.scrolling').slimScroll({
+        height: '280px'
+    });
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
-//button yesterday
-jQuery('.btn-wczoraj').click(function(){
-    jQuery('.btn-wczoraj').toggleClass('btn-info');
-    console.log(jQuery('.btn-wczoraj').text());
-    if(jQuery('.btn-wczoraj').text() === 'Wczoraj'){
-       jQuery('.btn-wczoraj').text('Dzisiaj');
-       
-       jQuery('#startDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
-       jQuery('#endDate').datepicker('setValue', jQuery('.btn-wczoraj').attr('data-date'));
-    }else{
-        jQuery('.btn-wczoraj').text('Wczoraj');
-        jQuery('#startDate').datepicker('setValue', jQuery('#startDate').attr('value'));
-        jQuery('#endDate').datepicker('setValue', jQuery('#startDate').attr('value'));
-    }
+var tableToExcel = (function() {
+  var uri = 'data:application/vnd.ms-excel;base64,'
+    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+  return function(table, name, element) {
+    if (!table.nodeType) table = document.getElementById(table)
+    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    element.href = uri + base64(format(template, ctx));
+  }
+})()
+
+
+jQuery('.report-li button').click(function(event){
+    jQuery(this).toggleClass('faved');
+    //jQuery(this).toggleClass('disabled');
+    event.stopPropagation();
 });
+
+//datepicker fix
+var myPicker = $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+var inputs = jQuery('.form-control.datepicker');
+var datepickers = jQuery(".datepicker.dropdown-menu");
+
+inputs.last().mousedown(function(){
+   datepickers.eq(0).hide();
+});
+
+inputs.eq(0).mousedown(function(){
+    datepickers.last().hide();
+});
+
