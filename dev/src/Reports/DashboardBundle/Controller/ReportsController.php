@@ -80,10 +80,10 @@ class ReportsController extends Controller {
     }
     
     public function getCampaigns($client, $status) {
-        $client = explode(' ', $client);
+        $client = strtolower(str_replace(' ', '_', $client));
         
         $campaigns = $this->em->getConnection()->prepare(
-                "SELECT campaign_name FROM cc_campaigns WHERE campaign_name LIKE '%" . $client[0] . "%' AND campaign_status = '" . $status . "' ORDER BY campaign_name DESC"
+                "SELECT campaign_name FROM cc_campaigns WHERE LOWER(campaign_name) LIKE '%" . $client . "%' AND campaign_status = '" . $status . "' ORDER BY campaign_name DESC"
             );
         
         $campaigns->execute();

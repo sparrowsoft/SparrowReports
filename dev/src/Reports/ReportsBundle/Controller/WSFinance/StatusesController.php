@@ -70,6 +70,7 @@ class StatusesController extends Controller {
         $table_body .= '<tr><td><strong>Pomyłka</strong></td><td>' . (isset($values[329]) ? $values[329] : 0) . '</td></tr>';
         $table_body .= '<tr><td><strong>Sukces</strong></td><td>' . (isset($values[428]) ? $values[428] : 0) . '</td></tr>';
         $table_body .= '<tr><td><strong>SUMA</strong></td><td><strong>' . $count_statuses . '</strong></td></tr>';
+        
         return $table_body;
     }
     
