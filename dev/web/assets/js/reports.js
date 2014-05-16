@@ -33,7 +33,9 @@ jQuery('.get-report').click(function() {
    var start = jQuery('#startDate').val();
    var end = jQuery('#endDate').val();
    
-   location.href = url + '&report=' + report + '&from=' + start + '&to=' + end;
+   url = url.split('&report');
+   
+   location.href = url[0] + '&report=' + report + '&from=' + start + '&to=' + end;
 });
 
 //button yesterday
