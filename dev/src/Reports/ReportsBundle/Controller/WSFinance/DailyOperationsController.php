@@ -91,7 +91,7 @@ class DailyOperationsController extends Controller {
                 in_array($number, $mobile_phones) ? $count_gsm_minutes += $time : $count_minutes += $time;
             }
             
-            if ( $call['calllog_callcode_id'] != '') {
+            if ( $call['calllog_callcode_id'] != '' AND $call['calllog_callcode_id'] != 442 ) {
                 $count_closed++;
             }
             

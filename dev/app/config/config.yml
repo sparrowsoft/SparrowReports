@@ -117,12 +117,16 @@ services:
         class: Reports\ReportsBundle\Controller\Supermemo\StatusesController
         calls:
             - [setContainer, ["@service_container"]]
-    reports_wsfinance_emails:
-        class: Reports\ReportsBundle\Controller\WSFinance\EmailsController
+    reports_wsfinance_consultant:
+        class: Reports\ReportsBundle\Controller\WSFinance\ConsultantController
         calls:
             - [setContainer, ["@service_container"]]
     reports_wsfinance_operations:
         class: Reports\ReportsBundle\Controller\WSFinance\DailyOperationsController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_wsfinance_statuses:
+        class: Reports\ReportsBundle\Controller\WSFinance\StatusesController
         calls:
             - [setContainer, ["@service_container"]]
     
