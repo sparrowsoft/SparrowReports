@@ -123,8 +123,6 @@ class IKAllRabatController extends Controller {
         foreach ( $calls as $call ) {
             if ( $call['calllog_makecall_phone_status'] === 1 AND $call['calllog_agent_status'] > 1) $calls_count++;
         }
-         
-        var_dump($calls_count);
         
         $phone_pln = 0.09;
         $mobile_phone_pln = 0.19;

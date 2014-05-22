@@ -16,12 +16,15 @@ jQuery(document).ready(function() {
     });
 
     $(".report-colum").height(400);
+    
     $('#myTabContent').slimScroll({
         height: '220px'
     });
+    
     $('.scrolling').slimScroll({
         height: '280px'
     });
+    
     $('[data-toggle="tooltip"]').tooltip();
 });
 
