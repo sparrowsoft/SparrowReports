@@ -26,6 +26,20 @@ jQuery(document).ready(function() {
     });
     
     $('[data-toggle="tooltip"]').tooltip();
+    
+    if ( $('body').hasClass('schedule') ) {
+        var date = new Date();
+	var d = date.getDate();
+	var m = date.getMonth();
+	var y = date.getFullYear();
+		
+	$('#schedule').fullCalendar({
+            editable: true,
+            dayClick: function() {
+                alert('a day has been clicked!');
+            }
+	});
+    }
 });
 
 var tableToExcel = (function() {

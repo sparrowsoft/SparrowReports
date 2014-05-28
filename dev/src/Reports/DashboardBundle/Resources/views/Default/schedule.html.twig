@@ -3,4 +3,16 @@
 {% block bodyClass %}dashboard schedule{% endblock %}
 {% block body %}
     {% include "header.html.twig" %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Terminarz
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div id="schedule"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

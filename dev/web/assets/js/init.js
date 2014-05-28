@@ -4,13 +4,15 @@ loadFiles([ //JS and CSS to load when preloading
     "//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.0/jquery.min.js",
     "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js",
     "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css",
+    "/web/assets/css/fullcalendar.css",
     "/web/assets/js/bootstrap-datepicker.js",
     "/web/assets/js/getBootstrapTheme.js",
     "//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900&subset=latin,latin-ext",
     "//brianreavis.github.io/selectize.js/js/selectize.js",
     "/web/assets/js/globalScripts.js",
     "/web/assets/js/jquery.slimscroll.min.js",
-    "/web/assets/js/reports.js"
+    "/web/assets/js/reports.js",
+    "/web/assets/js/fullcalendar.js"
 ]);
 
 //init functions
