@@ -129,4 +129,12 @@ services:
         class: Reports\ReportsBundle\Controller\WSFinance\StatusesController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_common_operations:
+        class: Reports\ReportsBundle\Controller\Common\DailyOperationsController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_ing_leads:
+        class: Reports\ReportsBundle\Controller\ING\LeadsController
+        calls:
+            - [setContainer, ["@service_container"]]
     

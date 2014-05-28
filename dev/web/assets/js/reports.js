@@ -35,7 +35,12 @@ jQuery('.get-report').click(function() {
    
    url = url.split('&report');
    
-   location.href = url[0] + '&report=' + report + '&from=' + start + '&to=' + end;
+   if ( jQuery('.leads-input').hasClass('visible') ) {
+       var leads = jQuery('.leads-input input').val();
+       location.href = url[0] + '&report=' + report + '&leads=' + (leads > 0 ? leads : 0);
+   } else {
+        location.href = url[0] + '&report=' + report + '&from=' + start + '&to=' + end;
+   }
 });
 
 //button yesterday
@@ -52,4 +57,8 @@ jQuery('.btn-wczoraj').click(function(){
         jQuery('#startDate').datepicker('setValue', jQuery('#startDate').attr('value'));
         jQuery('#endDate').datepicker('setValue', jQuery('#startDate').attr('value'));
     }
+});
+
+jQuery('.leads-report').click(function() {
+    jQuery('.leads-input').show().addClass('visible');
 });
