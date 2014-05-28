@@ -43,25 +43,27 @@ class LeadsController extends Controller {
         
         $file_array = array();
         $table_body = '';
-		
-        foreach ( $results->LeadSummary as $result ) {
-            $table_body .= '<tr><td>' . $result->RecordID . '</td><td>' . $result->NumberLife . '</td><td>' . $result->NumberPTE . '</td><td>' . $result->NumberPS . '</td>
-                <td>' . $result->PESEL . '</td><td>' . $result->LastName . '</td><td>' . $result->FirstName . '</td><td>' . $result->MiddleName1 . '</td>
-                <td>' . $result->MiddleName2 . '</td><td>' . $result->BirthDate . '</td><td>' . $result->Gender . '</td><td>' . $result->Phone1 . '</td>
-                <td>' . $result->Phone2 . '</td><td>' . $result->Street . '</td><td>' . $result->StreetNumber . '</td><td>' . $result->ApertmentNumber . '</td>
-                <td>' . $result->City . '</td><td>' . $result->District . '</td><td>' . $result->ZipCode . '</td><td>' . $result->Street1 . '</td>
-                <td>' . $result->StreetNumber1 . '</td><td>' . $result->ApartmentNumber1 . '</td><td>' . $result->City1 . '</td><td>' . $result->District1 . '</td>
-                <td>' . $result->ZipCode1 . '</td><td>' . $result->SalaryRange . '</td><td>' . $result->KindOfLocality . '</td><td>' . $result->CampaignId . '</td>
-                <td>' . $result->SegmentId . '</td><td>' . $result->BranchId . '</td><td>' . $result->HonorCalendarCapacity . '</td><td>' . $result->MeetingDate . '</td>
-                <td>' . $result->MeetingPlace . '</td><td>' . $result->AgentNumber . '</td><td>' . $result->ProductCategory . '</td><td>' . $result->MarketingFlag . '</td>
-                <td>' . $result->Priority . '</td><td>' . $result->SendToCC . '</td><td>' . $result->GroupID . '</td><td>' . $result->Notes . '</td>
-                <td>' . $result->CompanyName . '</td><td></td><td>' . $result->CompanyEmployeeNr . '</td><td></td><td></td><td></td><td></td></tr>';
-			
-            foreach ( $result as $cell ) {
-                $file_array[]= $cell;
+        
+        if ( isset($results->LeadSummary) ) { 
+            foreach ( $results->LeadSummary as $result ) {
+                $table_body .= '<tr><td>' . $result->RecordID . '</td><td>' . $result->NumberLife . '</td><td>' . $result->NumberPTE . '</td><td>' . $result->NumberPS . '</td>
+                    <td>' . $result->PESEL . '</td><td>' . $result->LastName . '</td><td>' . $result->FirstName . '</td><td>' . $result->MiddleName1 . '</td>
+                    <td>' . $result->MiddleName2 . '</td><td>' . $result->BirthDate . '</td><td>' . $result->Gender . '</td><td>' . $result->Phone1 . '</td>
+                    <td>' . $result->Phone2 . '</td><td>' . $result->Street . '</td><td>' . $result->StreetNumber . '</td><td>' . $result->ApertmentNumber . '</td>
+                    <td>' . $result->City . '</td><td>' . $result->District . '</td><td>' . $result->ZipCode . '</td><td>' . $result->Street1 . '</td>
+                    <td>' . $result->StreetNumber1 . '</td><td>' . $result->ApartmentNumber1 . '</td><td>' . $result->City1 . '</td><td>' . $result->District1 . '</td>
+                    <td>' . $result->ZipCode1 . '</td><td>' . $result->SalaryRange . '</td><td>' . $result->KindOfLocality . '</td><td>' . $result->CampaignId . '</td>
+                    <td>' . $result->SegmentId . '</td><td>' . $result->BranchId . '</td><td>' . $result->HonorCalendarCapacity . '</td><td>' . $result->MeetingDate . '</td>
+                    <td>' . $result->MeetingPlace . '</td><td>' . $result->AgentNumber . '</td><td>' . $result->ProductCategory . '</td><td>' . $result->MarketingFlag . '</td>
+                    <td>' . $result->Priority . '</td><td>' . $result->SendToCC . '</td><td>' . $result->GroupID . '</td><td>' . $result->Notes . '</td>
+                    <td>' . $result->CompanyName . '</td><td></td><td>' . $result->CompanyEmployeeNr . '</td><td></td><td></td><td></td><td></td></tr>';
+
+                foreach ( $result as $cell ) {
+                    $file_array[]= $cell;
+                }
             }
         }
-
+        
         fputcsv($fp, $file_array);
         fclose($fp);
         
