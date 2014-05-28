@@ -85,6 +85,10 @@ services:
         class: Reports\DashboardBundle\Controller\ReportsController
         calls:
             - [setContainer, ["@service_container"]]
+    schedule_service:
+        class: Reports\DashboardBundle\Controller\ScheduleController
+        calls:
+            - [setContainer, ["@service_container"]]
     reports_raabe_konsultant:
         class: Reports\ReportsBundle\Controller\Raabe\KonsultantController
         calls:

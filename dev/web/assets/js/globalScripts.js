@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
 	$('#schedule').fullCalendar({
             editable: true,
             dayClick: function() {
-                alert('a day has been clicked!');
+                $('#addSchift').modal('show');
             }
 	});
     }
