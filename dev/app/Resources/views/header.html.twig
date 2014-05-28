@@ -13,9 +13,14 @@
                 <li{% if app.request.getPathInfo == '/dashboard/index' %} class="active"{% endif %}>
                     <a href="{{ path('dashboard', { 'page' : 'index' }) }}">Kokpit</a>
                 </li>
+                <li{% if app.request.getPathInfo == '/dashboard/schedule' %} class="active"{% endif %}>
+                    <a href="{{ path('dashboard', { 'page' : 'schedule' }) }}">Terminarz</a>
+                </li>
+                {% if session.role != 't' %}
                 <li{% if app.request.getPathInfo == '/dashboard/reports' %} class="active"{% endif %}>
                     <a href="{{ path('dashboard', { 'page' : 'reports' }) }}">Raporty</a>
                 </li>
+                {% endif %}
                 <li{% if app.request.getPathInfo == '/dashboard/profile' %} class="active"{% endif %}>
                     <a href="{{ path('dashboard', { 'page' : 'profile' }) }}">Profil</a>
                 </li>

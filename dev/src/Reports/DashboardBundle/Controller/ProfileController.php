@@ -61,7 +61,7 @@ class ProfileController extends Controller {
         if ( $user_data->role == 'a' || isset($this->action)) {
             $form->add('role', 'choice', array(
                 'label' => 'Uprawnienia',
-                'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator'),
+                'choices' => array('u' => 'Użytkownik', 'a' => 'Administrator', 't' => 'Telemarketer'),
                 'data' => $user_data->role,
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-lg-3 control-label')

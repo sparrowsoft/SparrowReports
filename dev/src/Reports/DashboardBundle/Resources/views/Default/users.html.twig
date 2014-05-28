@@ -42,7 +42,9 @@
                             <td><span class="label label-danger">Administrator</span></td>
                             {% elseif user.role == 'u' %}
                             <td><span class="label label-default">Użytkownik</span></td>
-                            {% endif %}    
+                            {% elseif user.role == 't' %}
+                            <td><span class="label label-warning">Telemarketer</span></td>
+                            {% endif %} 
                             <td>
                                 {% if user.id == session.id %}
                                 <button type="button" class="btn btn-primary btn-xs" onclick="location.href='{{ path('dashboard', { 'page' : 'profile' }) }}'">Edytuj</button>
