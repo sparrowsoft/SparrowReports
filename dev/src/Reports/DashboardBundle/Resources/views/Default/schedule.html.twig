@@ -20,10 +20,30 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Dodaj zmianę</h4>
+                    <h4 class="modal-title" id="myModalLabel">Dodaj akcję</h4>
                 </div>
                 <div class="modal-body">
-                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Treść akcji</label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Godzina</label>
+                            <select>
+                                {% for i in 0..23 %}
+                                <option {{ i == 8 ? 'selected': false }}>{{ i < 10 ? '0': false }}{{ i }}:00</option>
+                                {% endfor %}
+                            </select>
+                            <select>
+                                {% for i in 0..23 %}
+                                <option {{ i == 16 ? 'selected': false }}>{{ i < 10 ? '0': false }}{{ i }}:00</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
