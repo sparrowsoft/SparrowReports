@@ -25,19 +25,22 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-xs-12">
-                            <label>Treść akcji</label>
-                            <textarea class="form-control"></textarea>
+                            <div class="form-group" id="schedule-text">
+                                <label class="control-label">Treść akcji</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <label>Godzina</label>
-                            <select>
+                            <label>Ustaw zajętość od </label>
+                            <select id="time-start">
                                 {% for i in 0..23 %}
                                 <option {{ i == 8 ? 'selected': false }}>{{ i < 10 ? '0': false }}{{ i }}:00</option>
                                 {% endfor %}
                             </select>
-                            <select>
+                            <label> do </label>
+                            <select id="time-end">
                                 {% for i in 0..23 %}
                                 <option {{ i == 16 ? 'selected': false }}>{{ i < 10 ? '0': false }}{{ i }}:00</option>
                                 {% endfor %}
@@ -46,10 +49,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" id="schedule-date" value="" />
                     <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-                    <button type="button" class="btn btn-warning" onclick="">Dodaj</button>
+                    <button type="button" class="btn btn-warning" onclick="addSchedule()">Dodaj</button>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

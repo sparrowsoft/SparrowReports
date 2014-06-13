@@ -73,7 +73,7 @@ class DefaultController extends Controller
                 return $args;
                 
             case 'schedule':
-                $args = $this->get('schedule_service')->show();
+                $args = $this->get('schedule_service')->show($user->id);
                 return $args;
                 
             default: return array('breadcrumbs' => '<li class="active">Strona główna</li>');

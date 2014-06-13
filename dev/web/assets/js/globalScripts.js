@@ -35,8 +35,11 @@ jQuery(document).ready(function() {
 		
 	$('#schedule').fullCalendar({
             editable: true,
+            events: "/src/Reports/DashboardBundle/Controller/EventsController.php",
             dayClick: function() {
                 $('#addSchift').modal('show');
+                var date = $(this).data('date');
+                $('#schedule-date').val(date);
             }
 	});
     }
@@ -74,3 +77,17 @@ inputs.eq(0).mousedown(function(){
     datepickers.last().hide();
 });
 
+function addSchedule(e) {
+    var scheduleText = $('#addSchift textarea').val();
+    
+    if ( !scheduleText ) {
+        $('#schedule-text').addClass('has-error');
+    } else {
+        var time_start = $('#time-start').val() + ':00';
+        var time_end = $('#time-end').val() + ':00';
+        var date = $('#schedule-date').val();
+        
+        var url = location.href.split('?');
+        location.href = url[0] + '?add&date=' + date + '&timestart=' + time_start + '&timeend=' + time_end + '&text=' + scheduleText;
+    }
+}
