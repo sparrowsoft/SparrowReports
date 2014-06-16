@@ -149,3 +149,11 @@ services:
         class: Reports\ReportsBundle\Controller\Klimuszko\StatusesController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_vivi_statuses:
+        class: Reports\ReportsBundle\Controller\Vivi\StatusesController
+        calls:
+            - [setContainer, ["@service_container"]]
+    reports_vivi_konsultant:
+        class: Reports\ReportsBundle\Controller\Vivi\KonsultantController
+        calls:
+            - [setContainer, ["@service_container"]]
