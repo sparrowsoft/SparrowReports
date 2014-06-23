@@ -83,6 +83,17 @@ class KonsultantController extends Controller {
         return array('target' => $counter, 'work_time' => round(($work_time/3600), 2));
     }
     
+    public function getCost($agentId) {
+        $query = "SELECT tocall_out2, tocall_out1 FROM cc_tocall WHERE calllog_agentid = " . $agentId . " AND "
+                . "tocall_s_callcode = 3 AND tocall_campaign = '" . $this->campaign_id[0]['campaign_id'] . "' "
+                . "AND tocall_dialer_status_time between '" . $this->start . " 00:00:00' AND '" . $this->end . " 23:59:59'";
+        
+        $result = $this->em->getConnection()->prepare($query);
+        $result->execute();
+        
+        return $result->fetchAll();
+    }
+    
     public function Agents() {
         $closed_query = "SELECT DISTINCT calllog_agentid AS AGENT FROM cc_calllog WHERE calllog_agentid IS NOT NULL
                 AND calllog_campaign = '" . $this->campaign_id[0]['campaign_id'] . "'
@@ -105,24 +116,37 @@ class KonsultantController extends Controller {
     
     public function getTableHead() {
         $table_head = '<tr><th>#</th><th>Agent</th><th>Osób docelowych</th>
-                <th>Zamówień</th><th>Skuteczność do osoby docelowej</th><th>Liczba godzin pracy</th>
+                <th>Zamówień</th><th>Wartość zamówień *</th><th>Skuteczność do osoby docelowej</th><th>Liczba godzin pracy</th>
                 <th>Zamknięć</th><th>Efektywność</th></tr>';
         
         return $table_head;
     }
-
+    
     public function getTableBody() {
         $table_body = '';
         $count_rows = 1;
         $count_orders = 0;
         $count_target = 0;
-        $count_target_efficacy = 0;
         $count_work_time = 0;
         $count_closed = 0;
+        $count_pln = 0;
         
         foreach ( $this->Agents() as $record ) {
-            $agent = $this->AgentName($record['agent']);
+            $cost = $this->getCost($record['agent']);
+            $pattern = "/\d\d\,\d{0,2}/";
             
+            $user_price = 0;
+            
+            foreach ( $cost as $price ) {
+                $amount = preg_match($pattern, $price['tocall_out1'], $matches); 
+                
+                if ( $amount === 1) {
+                    $amount = explode(',', $matches[0]);
+                    $user_price += $price['tocall_out2'] * $amount[0];
+                }
+            }
+            
+            $agent = $this->AgentName($record['agent']);
             $orders = $this->Orders($record['agent']);
             $closed = $this->Closed($record['agent']);
             $work_time = $this->WorkTime($record['agent']);
@@ -131,21 +155,26 @@ class KonsultantController extends Controller {
             $target_efficacy = ($work_time['target'] > 0 and $orders[0]['orders'] > 0 ) ? ($orders[0]['orders'] / $work_time['target']) * 100 : 0.00;
             
             $table_body .= '<tr><td>' . $count_rows . '</td><td>' . $agent[0]['user_name'] . ' ' . $agent[0]['user_surname'] . '</td>'
-                    . '<td>' . $work_time['target'] . '</td><td>' . $orders[0]['orders'] . '</td><td>' . round($target_efficacy, 2) . '%</td><td>' . $work_time['work_time'] . '</td><td>' . $closed[0]['closed'] . '</td><td>' . round($efficacy, 2) . '%</td></tr>';
+                    . '<td>' . $work_time['target'] . '</td><td>' . $orders[0]['orders'] . '</td><td>' . $user_price . ' zł</td><td>' . round($target_efficacy, 2) . '%</td><td>' . $work_time['work_time'] . '</td><td>' . $closed[0]['closed'] . '</td><td>' . round($efficacy, 2) . '%</td></tr>';
             
             $count_rows++;
             $count_orders += $orders[0]['orders'];
             $count_target += $work_time['target'];
             $count_work_time += $work_time['work_time'];
             $count_closed += $closed[0]['closed'];
+            $count_pln += $user_price;
         }
         
-        $table_body .= '<tr style="font-weight: bold"><td>#</td><td>SUMA</td><td>' . $count_target . '</td><td>' . $count_orders. '</td><td>-</td>'
-                . '<td>' . $count_work_time . '</td><td>' . $count_closed . '</td><td>-</td></tr>';
+        $all_efficacy = ($count_closed > 0 and $count_orders > 0 ) ? ($count_orders / $count_closed) * 100 : 0.00;
+        $target_all_efficacy = ($count_target > 0 and $count_orders > 0 ) ? ($count_orders / $count_target) * 100 : 0.00;
+        
+        $table_body .= '<tr style="font-weight: bold"><td>#</td><td>SUMA</td><td>' . $count_target . '</td><td>' . $count_orders. '</td><td>' . $count_pln . ' zł</td>'
+                . '<td>' . round($target_all_efficacy, 2) . '%</td><td>' . $count_work_time . '</td><td>' . $count_closed . '</td><td>' . round($all_efficacy, 2) . '%</td></tr>';
+        
+        $table_body .= '</table><p style="font-size: 12px">* Suma kosztów zamówień jest wartością orientacyjną. Tylko w przypadku kiedy agent prawidłowo po sprzedaży obsłuży formatkę, cena będzie się zgadzała.</p>';
         
         return $table_body;
     }
-    
 }
 
 

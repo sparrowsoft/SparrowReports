@@ -145,6 +145,10 @@ services:
         class: Reports\ReportsBundle\Controller\AIG\StatusesController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_aig_contact:
+        class: Reports\ReportsBundle\Controller\AIG\ContactController
+        calls:
+            - [setContainer, ["@service_container"]]
     reports_klimuszko_statuses:
         class: Reports\ReportsBundle\Controller\Klimuszko\StatusesController
         calls:

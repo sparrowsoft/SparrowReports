@@ -74,7 +74,7 @@ class StatusesController extends Controller {
         $table_body .= '<tr><td><strong>Odmowa połączenia z osobą docelową</strong></td><td>' . (isset($values[30]) ? $values[30] : 0) . '</td></tr>';
         $table_body .= '<tr><td><strong>Niezainteresowany</strong></td><td>' . (isset($values[9]) ? $values[9] : 0) . '</td></tr>';
         $table_body .= '<tr><td><strong>Posiada inne</strong></td><td>' . (isset($values[564]) ? $values[564] : 0) . '</td></tr>';
-        $table_body .= '<tr><td><strong>Posiada inne</strong></td><td>' . (isset($values[10]) ? $values[10] : 0) . '</td></tr>';
+        $table_body .= '<tr><td><strong>Brak czasu</strong></td><td>' . (isset($values[10]) ? $values[10] : 0) . '</td></tr>';
         $table_body .= '<tr><td><strong>SUMA</strong></td><td><strong>' . $count_statuses . '</strong></td></tr>';
 
         return $table_body;
