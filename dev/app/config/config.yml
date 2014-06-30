@@ -161,3 +161,7 @@ services:
         class: Reports\ReportsBundle\Controller\Vivi\KonsultantController
         calls:
             - [setContainer, ["@service_container"]]
+    reports_aig_konsultant:
+        class: Reports\ReportsBundle\Controller\AIG\KonsultantController
+        calls:
+            - [setContainer, ["@service_container"]]
